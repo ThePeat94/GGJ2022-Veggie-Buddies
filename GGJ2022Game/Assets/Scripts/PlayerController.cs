@@ -1,4 +1,5 @@
-﻿using Nidavellir.Scriptables;
+﻿using System;
+using Nidavellir.Scriptables;
 using UnityEngine;
 
 namespace Nidavellir
@@ -14,10 +15,18 @@ namespace Nidavellir
         private InputProcessor m_inputProcessor;
         private Animator m_animator;
         private GameObject m_currentInteractable;
-    
+
+        private EventHandler m_playerDied;
+
         private static readonly int s_isWalkingHash = Animator.StringToHash("IsWalking");
 
         public static PlayerController Instance => s_instance;
+        
+        public event EventHandler OnPlayerDied
+        {
+            add => this.m_playerDied += value;
+            remove => this.m_playerDied -= value;
+        }
     
     
         private void Awake()
@@ -51,7 +60,7 @@ namespace Nidavellir
 
         public void PlayerHurt()
         {
-            
+            this.m_playerDied?.Invoke(this, System.EventArgs.Empty);
         }
     
         protected void Move()

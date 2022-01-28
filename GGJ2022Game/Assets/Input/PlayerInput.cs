@@ -53,6 +53,15 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Restart"",
+                    ""type"": ""Button"",
+                    ""id"": ""304d7d2d-acdf-4cb6-a7bd-899e835e6793"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -132,6 +141,17 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""action"": ""Inspect"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2f466f60-5062-4177-9b40-31f6b6ad1afb"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Restart"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -143,6 +163,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         m_Actions_Move = m_Actions.FindAction("Move", throwIfNotFound: true);
         m_Actions_Interact = m_Actions.FindAction("Interact", throwIfNotFound: true);
         m_Actions_Inspect = m_Actions.FindAction("Inspect", throwIfNotFound: true);
+        m_Actions_Restart = m_Actions.FindAction("Restart", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -205,6 +226,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
     private readonly InputAction m_Actions_Move;
     private readonly InputAction m_Actions_Interact;
     private readonly InputAction m_Actions_Inspect;
+    private readonly InputAction m_Actions_Restart;
     public struct ActionsActions
     {
         private @PlayerInput m_Wrapper;
@@ -212,6 +234,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         public InputAction @Move => m_Wrapper.m_Actions_Move;
         public InputAction @Interact => m_Wrapper.m_Actions_Interact;
         public InputAction @Inspect => m_Wrapper.m_Actions_Inspect;
+        public InputAction @Restart => m_Wrapper.m_Actions_Restart;
         public InputActionMap Get() { return m_Wrapper.m_Actions; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -230,6 +253,9 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @Inspect.started -= m_Wrapper.m_ActionsActionsCallbackInterface.OnInspect;
                 @Inspect.performed -= m_Wrapper.m_ActionsActionsCallbackInterface.OnInspect;
                 @Inspect.canceled -= m_Wrapper.m_ActionsActionsCallbackInterface.OnInspect;
+                @Restart.started -= m_Wrapper.m_ActionsActionsCallbackInterface.OnRestart;
+                @Restart.performed -= m_Wrapper.m_ActionsActionsCallbackInterface.OnRestart;
+                @Restart.canceled -= m_Wrapper.m_ActionsActionsCallbackInterface.OnRestart;
             }
             m_Wrapper.m_ActionsActionsCallbackInterface = instance;
             if (instance != null)
@@ -243,6 +269,9 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @Inspect.started += instance.OnInspect;
                 @Inspect.performed += instance.OnInspect;
                 @Inspect.canceled += instance.OnInspect;
+                @Restart.started += instance.OnRestart;
+                @Restart.performed += instance.OnRestart;
+                @Restart.canceled += instance.OnRestart;
             }
         }
     }
@@ -252,5 +281,6 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         void OnMove(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
         void OnInspect(InputAction.CallbackContext context);
+        void OnRestart(InputAction.CallbackContext context);
     }
 }

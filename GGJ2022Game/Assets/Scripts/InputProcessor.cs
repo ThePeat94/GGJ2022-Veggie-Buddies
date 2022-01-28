@@ -10,6 +10,7 @@ namespace Nidavellir
         public Vector2 Movement => this.m_movementInput;
         public bool InteractTriggered => this.m_playerInput.Actions.Interact.triggered;
         public bool InspectTriggered => this.m_playerInput.Actions.Inspect.triggered;
+        public bool RestartTriggered => this.m_playerInput.Actions.Restart.triggered;
     
         private void Awake()
         {
