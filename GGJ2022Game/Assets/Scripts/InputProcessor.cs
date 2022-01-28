@@ -1,36 +1,31 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.InputSystem;
 
 public class InputProcessor : MonoBehaviour
 {
-    private PlayerInput m_playerInput;
-    private Vector2 m_movementInput;
+    [SerializeField]
+    private bool inverseVerticalAxis;
 
-    public Vector2 Movement => this.m_movementInput;
-    public bool InteractTriggered => this.m_playerInput.Actions.Interact.triggered;
-    public bool InspectTriggered => this.m_playerInput.Actions.Inspect.triggered;
-    
+    private float verticalAxisFactor = 1f;
+
+    public float RunInput { get; private set; }
+
+    public UnityEvent JumpTriggered { get; set; } = new UnityEvent();
+
     private void Awake()
     {
-        this.m_playerInput = new PlayerInput();
+        this.verticalAxisFactor = this.inverseVerticalAxis ? - 1f : 1f;
     }
 
-    private void OnEnable()
+    public void OnRunInputChanged(InputAction.CallbackContext value)
     {
-        this.m_playerInput?.Enable();
+        this.RunInput = this.verticalAxisFactor * value.ReadValue<float>();
     }
 
-    private void Update()
+    public void OnJumpTriggered(InputAction.CallbackContext value)
     {
-        this.m_movementInput = this.m_playerInput.Actions.Move.ReadValue<Vector2>();
-    }
-
-    private void OnDisable()
-    {
-        this.m_playerInput?.Disable();
-        this.m_movementInput = Vector3.zero;
+        if (value.ReadValueAsButton())
+            this.JumpTriggered.Invoke();
     }
 }
