@@ -48,6 +48,11 @@ namespace Nidavellir
         {
             this.UpdateAnimator();
         }
+
+        public void PlayerHurt()
+        {
+            
+        }
     
         protected void Move()
         {
