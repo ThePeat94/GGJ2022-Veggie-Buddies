@@ -7,10 +7,10 @@ namespace Nidavellir.Scriptables
     {
         [SerializeField] private float m_movementSpeed;
         [SerializeField] private float m_rotationSpeed;
-        [SerializeField] private float m_jumpForce;
+        [SerializeField] private float m_jumpVelocity;
 
         public float MovementSpeed => this.m_movementSpeed;
         public float RotationSpeed => this.m_rotationSpeed;
-        public float JumpForce => this.m_jumpForce;
+        public float JumpVelocity => this.m_jumpVelocity;
     }
 }

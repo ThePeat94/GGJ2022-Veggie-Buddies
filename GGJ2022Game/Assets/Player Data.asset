@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_movementSpeed: 10
   m_rotationSpeed: 50
+  m_jumpVelocity: 18

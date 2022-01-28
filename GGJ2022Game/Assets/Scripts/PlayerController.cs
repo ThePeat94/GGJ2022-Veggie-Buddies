@@ -15,7 +15,14 @@ namespace Nidavellir
 
         private bool m_jumpTriggered = false;
 
-        private Vector3 m_jumpVelocity = Vector3.zero;
+        private float m_locomotionVelocity = 0f;
+        private float m_jumpVelocity = 0f;
+
+
+        public void Hurt()
+        {
+            Debug.Log("Player got hurt.");
+        }
 
         private void Awake()
         {
@@ -50,38 +57,42 @@ namespace Nidavellir
             this.UpdateAnimator();
         }
 
-        private Vector3 LocomotionVector => this.m_inputProcessor.RunInput * this.m_playerData.MovementSpeed * Vector3.right;
-
-        protected void ApplyLocomotion(float deltaTime)
+        private void ApplyLocomotion(float deltaTime)
         {
-            // we may only call Move with a non-zero vector in order to make sure the CharacterController.isGrounded property works
-            if (this.LocomotionVector.sqrMagnitude > Mathf.Epsilon)
-                this.m_characterController.Move(deltaTime * this.LocomotionVector);
+            var isGrounded = this.m_characterController.isGrounded;
+
+            this.m_locomotionVelocity = this.m_inputProcessor.RunInput * this.m_playerData.MovementSpeed;
+            if (Mathf.Abs(this.m_locomotionVelocity) > Mathf.Epsilon)
+                this.m_characterController.Move(Vector3.right * deltaTime * this.m_locomotionVelocity);
 
             if (this.m_jumpTriggered)
             {
                 this.m_jumpTriggered = false;
-                if (this.m_characterController.isGrounded)
+                if (isGrounded)
                 {
-                    this.m_characterController.SimpleMove(Vector3.up * this.m_playerData.JumpForce);
+                    this.m_jumpVelocity = this.m_playerData.JumpVelocity;
+                    //this.m_characterController.SimpleMove(Vector3.up * this.m_playerData.JumpHeight);
                 }
             }
         }
 
-        protected void ApplyGravity(float deltaTime)
+        private void ApplyGravity(float deltaTime)
         {
-            this.m_characterController.Move(deltaTime * Physics.gravity);
+            this.m_jumpVelocity += deltaTime * Physics.gravity.y;
+            if (this.m_jumpVelocity < 0)
+                this.m_jumpVelocity = 0;
+            this.m_characterController.Move(deltaTime * (Physics.gravity + Vector3.up * this.m_jumpVelocity));
         }
 
-        protected void UpdateLookDirection()
+        private void UpdateLookDirection()
         {
-            if (this.LocomotionVector.sqrMagnitude > Mathf.Epsilon)
-                this.m_characterController.transform.rotation = Quaternion.LookRotation(this.LocomotionVector.normalized, Vector3.up);
+            if (Mathf.Abs(this.m_locomotionVelocity) > Mathf.Epsilon)
+                this.m_characterController.transform.rotation = Quaternion.LookRotation(Vector3.right * Mathf.Sign(this.m_locomotionVelocity), Vector3.up);
         }
 
         private void UpdateAnimator()
         {
-            this.m_animator.SetBool(m_isWalkingHash, this.LocomotionVector.sqrMagnitude > Mathf.Epsilon);
+            this.m_animator.SetBool(m_isWalkingHash, Mathf.Abs(this.m_locomotionVelocity) > Mathf.Epsilon);
         }
     }
 }
