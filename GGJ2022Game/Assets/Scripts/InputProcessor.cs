@@ -2,30 +2,33 @@
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
-public class InputProcessor : MonoBehaviour
+namespace Nidavellir
 {
-    [SerializeField]
-    private bool inverseVerticalAxis;
-
-    private float verticalAxisFactor = 1f;
-
-    public float RunInput { get; private set; }
-
-    public UnityEvent JumpTriggered { get; set; } = new UnityEvent();
-
-    private void Awake()
+    public class InputProcessor : MonoBehaviour
     {
-        this.verticalAxisFactor = this.inverseVerticalAxis ? - 1f : 1f;
-    }
+        [SerializeField]
+        private bool inverseVerticalAxis;
 
-    public void OnRunInputChanged(InputAction.CallbackContext value)
-    {
-        this.RunInput = this.verticalAxisFactor * value.ReadValue<float>();
-    }
+        private float verticalAxisFactor = 1f;
 
-    public void OnJumpTriggered(InputAction.CallbackContext value)
-    {
-        if (value.ReadValueAsButton())
-            this.JumpTriggered.Invoke();
+        public float RunInput { get; private set; }
+
+        public UnityEvent JumpTriggered { get; set; } = new UnityEvent();
+
+        private void Awake()
+        {
+            this.verticalAxisFactor = this.inverseVerticalAxis ? -1f : 1f;
+        }
+
+        public void OnRunInputChanged(InputAction.CallbackContext value)
+        {
+            this.RunInput = this.verticalAxisFactor * value.ReadValue<float>();
+        }
+
+        public void OnJumpTriggered(InputAction.CallbackContext value)
+        {
+            if (value.ReadValueAsButton())
+                this.JumpTriggered.Invoke();
+        }
     }
 }
