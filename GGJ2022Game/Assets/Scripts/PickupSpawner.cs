@@ -6,10 +6,11 @@ namespace Nidavellir
     {
         [SerializeField] ItemKind Kind;
 
-        private void OnCollisionEnter(Collision other)
+        private void OnTriggerEnter(Collider other)
         {
-            Debug.Log($"PickupSpawner collided with: {other.gameObject}");
-            if (other.gameObject.TryGetComponent<PlayerController>(out var controller))
+            Debug.Log($"PickupSpawner triggered by: {other.gameObject}");
+            var controller = other.gameObject.GetComponentInParent<PlayerController>();
+            if (controller != null)
             {
                 controller.PickUp(this.Kind);
             }
