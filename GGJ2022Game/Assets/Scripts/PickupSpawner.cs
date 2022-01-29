@@ -8,6 +8,7 @@ namespace Nidavellir
 
         private void OnCollisionEnter(Collision other)
         {
+            Debug.Log($"PickupSpawner collided with: {other.gameObject}");
             if (other.gameObject.TryGetComponent<PlayerController>(out var controller))
             {
                 controller.PickUp(this.Kind);

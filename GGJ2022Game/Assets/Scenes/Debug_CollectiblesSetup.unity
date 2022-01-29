@@ -230,7 +230,7 @@ GameObject:
   - component: {fileID: 370922515}
   - component: {fileID: 370922514}
   - component: {fileID: 370922513}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1715,7 +1715,7 @@ GameObject:
   - component: {fileID: 2069676374}
   - component: {fileID: 2069676373}
   - component: {fileID: 2069676377}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: PumpkinSeedPickup
   m_TagString: Untagged
   m_Icon: {fileID: 0}

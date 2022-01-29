@@ -7,7 +7,7 @@ namespace Nidavellir
     {
         private void OnCollisionEnter(Collision other)
         {
-            Debug.Log($"Collided with: {other.gameObject}");
+            Debug.Log($"HurtingObstacle collided with: {other.gameObject}");
             if (other.gameObject.TryGetComponent<PlayerController>(out var controller))
             {
                 controller.PlayerHurt();
