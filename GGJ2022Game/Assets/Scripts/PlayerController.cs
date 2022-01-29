@@ -9,6 +9,7 @@ using UnityEngine.Audio;
 
 namespace Nidavellir
 {
+
     public class PlayerController : MonoBehaviour
     {
         [SerializeField] private PlayerData m_playerData;
@@ -23,6 +24,8 @@ namespace Nidavellir
         [SerializeField] private AudioClip m_runningLoopAudioClip;
         [SerializeField] private AudioClip m_landAudioClip;
         [SerializeField] private AudioClip m_hurtAudioClip;
+
+        [SerializeField] private PushAndPullAbility m_pushAndPullAbility;
 
         private CharacterController m_characterController;
         private InputProcessor m_inputProcessor;
@@ -131,6 +134,7 @@ namespace Nidavellir
             this.ApplyGravity(Time.deltaTime); // we have to apply gravity first to make sure the CharacterController.isGrounded property works
             this.ApplyLocomotion(Time.deltaTime);
             this.ExecuteAttack();
+            this.ExecutePushAndPullAbility();
             this.UpdateLookDirection();
         }
         private void LateUpdate()
@@ -177,6 +181,22 @@ namespace Nidavellir
                 this.m_hasJumpVelocity = true;
                 this.m_playJumpAnimation = true;
                 m_jumpRandomClipPlayer.PlayRandomOneShot();
+            }
+        }
+
+        private void ExecutePushAndPullAbility()
+        {
+            if (this.m_pushAndPullAbility != null)
+            {
+                if (this.m_inputProcessor.PushPullActivated)
+                {
+                    this.m_pushAndPullAbility.Activate(this.gameObject);
+                }
+
+                if (this.m_inputProcessor.PushPullDeactivated)
+                {
+                    this.m_pushAndPullAbility.Deactivate();
+                }
             }
         }
 
