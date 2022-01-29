@@ -9,6 +9,7 @@ namespace Nidavellir
         private static PlayerController s_instance;
 
         [SerializeField] private PlayerData m_playerData;
+        [SerializeField] private PlayerType m_playerType;
 
         private Vector3 m_moveDirection;
         private CharacterController m_characterController;
@@ -19,9 +20,9 @@ namespace Nidavellir
         private EventHandler m_playerDied;
 
         private static readonly int s_isWalkingHash = Animator.StringToHash("IsWalking");
-
-        public static PlayerController Instance => s_instance;
         
+
+        public PlayerType PlayerType => this.m_playerType;
         public event EventHandler OnPlayerDied
         {
             add => this.m_playerDied += value;
@@ -31,16 +32,6 @@ namespace Nidavellir
     
         private void Awake()
         {
-            if (s_instance == null)
-            {
-                s_instance = this;
-            }
-            else
-            {
-                Destroy(this.gameObject);
-                return;
-            }
-        
             this.m_inputProcessor = this.GetComponent<InputProcessor>();
             this.m_characterController = this.GetComponent<CharacterController>();
             this.m_animator = this.GetComponent<Animator>();
@@ -90,7 +81,5 @@ namespace Nidavellir
         {
             this.m_animator.SetBool(s_isWalkingHash, this.m_moveDirection != Physics.gravity);
         }
-
-
     }
 }

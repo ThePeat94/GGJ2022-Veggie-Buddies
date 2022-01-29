@@ -6,9 +6,7 @@ namespace Nidavellir.UI
     public class GameHUD : MonoBehaviour
     {
         private static GameHUD s_instance;
-
-        [SerializeField] private GameObject m_gameOverScreen;
-        
+        private GameSuccessUI m_gameSuccessUi;
 
         public static GameHUD Instance => s_instance;
         
@@ -23,21 +21,24 @@ namespace Nidavellir.UI
                 Destroy(this.gameObject);
                 return;
             }
+
+            this.m_gameSuccessUi = this.GetComponentInChildren<GameSuccessUI>();
         }
 
         private void Start()
         {
             GameStateManager.Instance.OnGameOver += this.OnGameOver;
+            GameStateManager.Instance.OnLevelSucceeded += this.OnLevelSucceeded;
+        }
+
+        private void OnLevelSucceeded(object sender, System.EventArgs e)
+        {
+            this.m_gameSuccessUi.ShowLevelSucceededScreen();
         }
 
         private void OnGameOver(object sender, System.EventArgs e)
         {
-            this.ShowGameOverScreen();
-        }
-
-        private void ShowGameOverScreen()
-        {
-            this.m_gameOverScreen.SetActive(true);
+            this.m_gameSuccessUi.ShowGameOverScreen();
         }
     }
 }
