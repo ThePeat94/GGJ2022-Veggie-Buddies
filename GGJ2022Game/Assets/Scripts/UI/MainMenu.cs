@@ -7,9 +7,11 @@ namespace Nidavellir.UI
     {
         [SerializeField] private GameObject m_startMenu;
         [SerializeField] private GameObject m_credits;
-
+        [SerializeField] private AudioClip m_gameTheme;
+        
         public void StartGame()
         {
+            MusicPlayer.Instance.PlayLoopingMusic(this.m_gameTheme);
             SceneManager.LoadScene(1);
         }
 

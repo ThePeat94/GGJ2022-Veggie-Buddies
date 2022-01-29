@@ -104,6 +104,12 @@ namespace Nidavellir
 
         private void Update()
         {
+            if(this.m_inputProcessor.QuitTriggered)
+            {
+                Application.Quit();
+                return;
+            }
+            
             var shouldRestart = this.m_anyPlayerDied && this.m_inputProcessor.RestartTriggered;
             if (shouldRestart)
             {
