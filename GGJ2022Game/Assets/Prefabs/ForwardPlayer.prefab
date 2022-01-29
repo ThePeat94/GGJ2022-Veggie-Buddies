@@ -155,7 +155,8 @@ MonoBehaviour:
   m_playerType: 0
   m_cinemachineBrain: {fileID: 0}
   m_hud: {fileID: 0}
-  m_weapon: {fileID: 8463840179677380845}
+  m_gun: {fileID: 8463840179677380845}
+  m_sword: {fileID: 0}
   m_runningLoopAudioClip: {fileID: 8300000, guid: f9974a47256367948858d36636225021, type: 3}
   m_landAudioClip: {fileID: 8300000, guid: 42b9b127c33e3974b8608f142f5f55ab, type: 3}
   m_hurtAudioClip: {fileID: 8300000, guid: 42b9b127c33e3974b8608f142f5f55ab, type: 3}

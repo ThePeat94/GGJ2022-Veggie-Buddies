@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Nidavellir
@@ -20,7 +18,18 @@ namespace Nidavellir
         {
             var projectile = collision.gameObject.GetComponent<Projectile>();
             if (projectile != null)
-                Destroy(this.gameObject);
+                this.Die();
+        }
+
+        public void OnSwordHit()
+        {
+            this.Die();
+        }
+
+        private void Die()
+        {
+            Destroy(this.gameObject);
+            // TODO: play audio clip
         }
 
         void Update()

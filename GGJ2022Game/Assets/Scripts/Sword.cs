@@ -1,10 +1,25 @@
-﻿namespace Nidavellir
+﻿using UnityEngine;
+using UnityEngine.Audio;
+
+namespace Nidavellir
 {
-    public class Sword : Weapon
+    public class Sword : MonoBehaviour
     {
-        public override void Attack()
+        [SerializeField] private AudioClip m_attackAudioClip;
+        [SerializeField] private AudioMixerGroup m_audioMixerGroup;
+
+        private AudioSource m_attackAudioSource;
+
+        private void Awake()
         {
-            base.Attack();
+            this.m_attackAudioSource = this.gameObject.AddComponent<AudioSource>();
+            this.m_attackAudioSource.clip = this.m_attackAudioClip;
+            this.m_attackAudioSource.outputAudioMixerGroup = this.m_audioMixerGroup;
+        }
+
+        public void Attack()
+        {
+            this.m_attackAudioSource.Play();
         }
     }
 }
