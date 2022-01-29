@@ -18,7 +18,7 @@ namespace Nidavellir
         internal void Activate(GameObject actingGameObject)
         {
             this.m_controllingGameObject = actingGameObject;
-            this.m_controlledPushPullables = this.m_reachableTargetDetector.GetPushPullables();
+            this.m_controlledPushPullables = this.m_reachableTargetDetector.PushPullablesInRange;
             this.m_active = true;
         }
 
