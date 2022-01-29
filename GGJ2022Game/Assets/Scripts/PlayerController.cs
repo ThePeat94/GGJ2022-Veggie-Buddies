@@ -5,6 +5,9 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Audio;
 using Cinemachine;
+using System.Collections.Generic;
+using UnityEngine.UIElements;
+using Nidavellir.UI;
 
 namespace Nidavellir
 {
@@ -13,12 +16,13 @@ namespace Nidavellir
         [SerializeField] private PlayerData m_playerData;
         [SerializeField] private AudioMixerGroup m_audioMixerGroup;
         [SerializeField] private PlayerType m_playerType;
+        [SerializeField] private CinemachineBrain m_cinemachineBrain;
+        [SerializeField] private GameHUD m_hud;
 
         [SerializeField] private AudioClip m_runningLoopAudioClip;
         [SerializeField] private AudioClip m_jumpAudioClip;
         [SerializeField] private AudioClip m_landAudioClip;
         [SerializeField] private AudioClip m_hurtAudioClip;
-        [SerializeField] private CinemachineBrain m_cinemachineBrain;
 
         private CharacterController m_characterController;
         private InputProcessor m_inputProcessor;
@@ -41,6 +45,7 @@ namespace Nidavellir
         private bool m_isDead;
 
         private EventHandler m_playerDied;
+        private Dictionary<ItemKind, int> m_itemCountsByItemKind = new();
 
         public PlayerType PlayerType => this.m_playerType;
 
@@ -55,6 +60,23 @@ namespace Nidavellir
             this.m_hurtAudioSource.Play();
             this.m_isDead = true;
             this.m_playerDied?.Invoke(this, System.EventArgs.Empty);
+        }
+
+        public void PickUp(ItemKind itemKind)
+        {
+            switch (itemKind)
+            {
+                case ItemKind.PumpkinSeeds:
+                    AddToInventory(itemKind);
+                    this.m_hud.SetPumpkinSeedCount(this.m_itemCountsByItemKind[ItemKind.PumpkinSeeds]);
+                    break;
+            }
+        }
+
+        private void AddToInventory(ItemKind kind)
+        {
+            var currentValue = this.m_itemCountsByItemKind.ContainsKey(kind) ? this.m_itemCountsByItemKind[kind] : 0;
+            m_itemCountsByItemKind[kind] = currentValue + 1;
         }
 
         private void Awake()

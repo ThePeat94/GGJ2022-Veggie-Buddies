@@ -7,10 +7,12 @@ namespace Nidavellir.UI
     {
         private static GameHUD s_instance;
         private GameSuccessUI m_gameSuccessUi;
+        private PumpkinSeedsDisplay m_pumpkinSeedDisplay;
 
         private void Awake()
         {
             this.m_gameSuccessUi = this.GetComponentInChildren<GameSuccessUI>();
+            this.m_pumpkinSeedDisplay = this.GetComponentInChildren<PumpkinSeedsDisplay>();
         }
 
         private void Start()
@@ -33,6 +35,11 @@ namespace Nidavellir.UI
         private void OnGameOver(object sender, System.EventArgs e)
         {
             this.m_gameSuccessUi.ShowGameOverScreen();
+        }
+
+        internal void SetPumpkinSeedCount(int v)
+        {
+            this.m_pumpkinSeedDisplay.SetPumpkinSeedCount(v);
         }
     }
 }
