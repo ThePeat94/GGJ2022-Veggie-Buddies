@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1996021600839326430}
+  - component: {fileID: 1931735735079972092}
   m_Layer: 0
   m_Name: WoodElevator
   m_TagString: Untagged
@@ -32,6 +33,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1931735735079972092
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2173759257844486146}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60e356745c3829843973fde873bd4b7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_startDelay: 0
+  m_duration: 1
+  m_height: 8
 --- !u!1001 &7226898239582564506
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -89,33 +105,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8ace4bc7fd7667d498220876f3319865, type: 3}
---- !u!1 &579600463545940411 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7800302880077400353, guid: 8ace4bc7fd7667d498220876f3319865, type: 3}
-  m_PrefabInstance: {fileID: 7226898239582564506}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1330601954177404142 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8519727226086341748, guid: 8ace4bc7fd7667d498220876f3319865, type: 3}
   m_PrefabInstance: {fileID: 7226898239582564506}
   m_PrefabAsset: {fileID: 0}
---- !u!95 &6457458857659564591
-Animator:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 579600463545940411}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: abbff9683b5e4da42b1dd07a1267dc1f, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
