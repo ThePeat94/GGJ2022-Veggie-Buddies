@@ -53,6 +53,15 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""QuitApplication"",
+                    ""type"": ""Button"",
+                    ""id"": ""dcb1a35a-418a-4692-b2db-ad8bbc171d67"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -165,6 +174,17 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""action"": ""Restart"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1e3b30bf-ea9d-4d71-9684-83344b4626d5"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""QuitApplication"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -176,6 +196,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         m_Actions_Run = m_Actions.FindAction("Run", throwIfNotFound: true);
         m_Actions_Jump = m_Actions.FindAction("Jump", throwIfNotFound: true);
         m_Actions_Restart = m_Actions.FindAction("Restart", throwIfNotFound: true);
+        m_Actions_QuitApplication = m_Actions.FindAction("QuitApplication", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -238,6 +259,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_Actions_Run;
     private readonly InputAction m_Actions_Jump;
     private readonly InputAction m_Actions_Restart;
+    private readonly InputAction m_Actions_QuitApplication;
     public struct ActionsActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -245,6 +267,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         public InputAction @Run => m_Wrapper.m_Actions_Run;
         public InputAction @Jump => m_Wrapper.m_Actions_Jump;
         public InputAction @Restart => m_Wrapper.m_Actions_Restart;
+        public InputAction @QuitApplication => m_Wrapper.m_Actions_QuitApplication;
         public InputActionMap Get() { return m_Wrapper.m_Actions; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -263,6 +286,9 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @Restart.started -= m_Wrapper.m_ActionsActionsCallbackInterface.OnRestart;
                 @Restart.performed -= m_Wrapper.m_ActionsActionsCallbackInterface.OnRestart;
                 @Restart.canceled -= m_Wrapper.m_ActionsActionsCallbackInterface.OnRestart;
+                @QuitApplication.started -= m_Wrapper.m_ActionsActionsCallbackInterface.OnQuitApplication;
+                @QuitApplication.performed -= m_Wrapper.m_ActionsActionsCallbackInterface.OnQuitApplication;
+                @QuitApplication.canceled -= m_Wrapper.m_ActionsActionsCallbackInterface.OnQuitApplication;
             }
             m_Wrapper.m_ActionsActionsCallbackInterface = instance;
             if (instance != null)
@@ -276,6 +302,9 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @Restart.started += instance.OnRestart;
                 @Restart.performed += instance.OnRestart;
                 @Restart.canceled += instance.OnRestart;
+                @QuitApplication.started += instance.OnQuitApplication;
+                @QuitApplication.performed += instance.OnQuitApplication;
+                @QuitApplication.canceled += instance.OnQuitApplication;
             }
         }
     }
@@ -285,5 +314,6 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         void OnRun(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnRestart(InputAction.CallbackContext context);
+        void OnQuitApplication(InputAction.CallbackContext context);
     }
 }

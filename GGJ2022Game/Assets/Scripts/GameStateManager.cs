@@ -57,12 +57,12 @@ namespace Nidavellir
                 Destroy(this);
                 return;
             } 
+            SceneManager.sceneLoaded += this.OnSceneLoaded;
         }
 
         private void Start()
         {
             Debug.Log("Start called");
-            SceneManager.sceneLoaded += this.OnSceneLoaded;
         }
 
         private void RegisterPlayerCheckPoints()
@@ -104,6 +104,12 @@ namespace Nidavellir
 
         private void Update()
         {
+            if(this.m_inputProcessor.QuitTriggered)
+            {
+                Application.Quit();
+                return;
+            }
+            
             var shouldRestart = this.m_anyPlayerDied && this.m_inputProcessor.RestartTriggered;
             if (shouldRestart)
             {
@@ -121,6 +127,10 @@ namespace Nidavellir
 
         private void OnSceneLoaded(Scene arg0, LoadSceneMode arg1)
         {
+            if (arg0.buildIndex == 0)
+                return;
+            
+            
             this.m_anyPlayerDied = false;
             this.m_forwardPlayerReachedGoal = false;
             this.m_backwardPlayerReachedGoal = false;

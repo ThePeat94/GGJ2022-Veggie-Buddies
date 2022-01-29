@@ -10,9 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4493416286542116476}
   - component: {fileID: 4493416286542116475}
-  - component: {fileID: 4493416286542116474}
   - component: {fileID: 4493416286542116473}
   - component: {fileID: 4493416286542116472}
+  - component: {fileID: 2475801129512816544}
+  - component: {fileID: 4179679514858240966}
   m_Layer: 12
   m_Name: Spikey
   m_TagString: Untagged
@@ -27,8 +28,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4493416286542116477}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -45, y: 0.71, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -44.43, y: 0.703, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -53,20 +54,7 @@ CharacterController:
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0.35, z: 0}
---- !u!135 &4493416286542116474
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4493416286542116477}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.65
-  m_Center: {x: 0, y: 0.35, z: 0}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &4493416286542116473
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -93,6 +81,35 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_frequency: 15
   m_amplitude: 1
+--- !u!65 &2475801129512816544
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4493416286542116477}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &4179679514858240966
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4493416286542116477}
+  serializedVersion: 2
+  m_Mass: 0.1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 120
+  m_CollisionDetection: 0
 --- !u!1001 &4493416287270460314
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -110,7 +127,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 7f6083dec971fc14a807b7d27fa622a0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.392
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 7f6083dec971fc14a807b7d27fa622a0, type: 3}
       propertyPath: m_LocalPosition.z

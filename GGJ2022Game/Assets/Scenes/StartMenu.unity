@@ -548,6 +548,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8756797789183169871, guid: b119e383d2e85bc4982380d7ef5170cf, type: 3}
+      propertyPath: m_gameTheme
+      value: 
+      objectReference: {fileID: 8300000, guid: 0e7edce1d21093f48b37922919d8df3f, type: 3}
     - target: {fileID: 8756797790071856070, guid: b119e383d2e85bc4982380d7ef5170cf, type: 3}
       propertyPath: m_Spacing
       value: 50

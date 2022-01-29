@@ -16,9 +16,8 @@ namespace Nidavellir
 
         public bool JumpTriggered { get; set; }
 
-        public bool RestartTriggered =>
-            this.m_playerInput.actions["Restart"]
-                .triggered;
+        public bool RestartTriggered => this.m_playerInput.actions["Restart"].triggered;
+        public bool QuitTriggered => this.m_playerInput.actions["QuitApplication"].triggered; 
 
         private void Awake()
         {

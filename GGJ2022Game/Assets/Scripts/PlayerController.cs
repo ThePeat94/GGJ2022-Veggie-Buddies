@@ -54,6 +54,13 @@ namespace Nidavellir
             remove => this.m_playerDied -= value;
         }
 
+        public void KillPlayer()
+        {
+            this.m_hurtAudioSource.Play();
+            this.m_isDead = true;
+            this.m_playerDied?.Invoke(this, System.EventArgs.Empty);
+        }
+
         public void PlayerHurt()
         {
             this.m_hurtAudioSource.Play();
@@ -76,6 +83,8 @@ namespace Nidavellir
         {
             this.StartCoroutine(Respawn(respawnPosition));
         }
+        
+        
 
         private IEnumerator Respawn(Vector3 respawnPosition)
         {
@@ -220,5 +229,6 @@ namespace Nidavellir
                 // set falling animation
             }
         }
+
     }
 }
