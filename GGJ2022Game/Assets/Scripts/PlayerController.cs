@@ -6,26 +6,17 @@ using UnityEngine.Audio;
 using Cinemachine;
 using System.Collections.Generic;
 using UnityEngine.UIElements;
+using Nidavellir.UI;
 
 namespace Nidavellir
 {
-    public class Hud : MonoBehaviour
-    {
-        [SerializeField] UIDocument m_doc;
-
-        internal void SetPumpkinSeedCount(int v)
-        {
-            throw new NotImplementedException();
-        }
-    }
-
     public class PlayerController : MonoBehaviour
     {
         [SerializeField] private PlayerData m_playerData;
         [SerializeField] private AudioMixerGroup m_audioMixerGroup;
         [SerializeField] private PlayerType m_playerType;
         [SerializeField] private CinemachineBrain m_cinemachineBrain;
-        [SerializeField] private Hud m_hud;
+        [SerializeField] private GameHUD m_hud;
 
         [SerializeField] private AudioClip m_runningLoopAudioClip;
         [SerializeField] private AudioClip m_jumpAudioClip;
