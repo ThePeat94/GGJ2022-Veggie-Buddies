@@ -1,13 +1,11 @@
-﻿using System;
+﻿using Cinemachine;
 using Nidavellir.Scriptables;
+using Nidavellir.UI;
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
-using Cinemachine;
-using System.Collections.Generic;
-using UnityEngine.UIElements;
-using Nidavellir.UI;
 
 namespace Nidavellir
 {
@@ -20,22 +18,20 @@ namespace Nidavellir
         [SerializeField] private GameHUD m_hud;
 
         [SerializeField] private AudioClip m_runningLoopAudioClip;
-        [SerializeField] private AudioClip m_jumpAudioClip;
         [SerializeField] private AudioClip m_landAudioClip;
         [SerializeField] private AudioClip m_hurtAudioClip;
 
         private CharacterController m_characterController;
         private InputProcessor m_inputProcessor;
         private Animator m_animator;
+        private RandomClipPlayer m_jumpRandomClipPlayer;
         private AudioSource m_runningLoopAudioSource;
-        private AudioSource m_jumpAudioSource;
         private AudioSource m_landAudioSource;
         private AudioSource m_hurtAudioSource;
 
         private static readonly int s_isWalkingHash = Animator.StringToHash("IsWalking");
         private static readonly int s_jumpHash = Animator.StringToHash("Jump");
 
-        private bool m_jumpTriggered = false;
         private float m_locomotionVelocity = 0f;
         private bool m_isLocomoting;
         private float m_jumpVelocity = 0f;
@@ -101,15 +97,12 @@ namespace Nidavellir
             this.m_inputProcessor = this.GetComponent<InputProcessor>();
             this.m_characterController = this.GetComponent<CharacterController>();
             this.m_animator = this.GetComponent<Animator>();
+            this.m_jumpRandomClipPlayer = this.GetComponent<RandomClipPlayer>();
 
             this.m_runningLoopAudioSource = this.gameObject.AddComponent<AudioSource>();
             this.m_runningLoopAudioSource.clip = this.m_runningLoopAudioClip;
             this.m_runningLoopAudioSource.loop = true;
             this.m_runningLoopAudioSource.outputAudioMixerGroup = this.m_audioMixerGroup;
-
-            this.m_jumpAudioSource = this.gameObject.AddComponent<AudioSource>();
-            this.m_jumpAudioSource.clip = this.m_jumpAudioClip;
-            this.m_jumpAudioSource.outputAudioMixerGroup = this.m_audioMixerGroup;
 
             this.m_landAudioSource = this.gameObject.AddComponent<AudioSource>();
             this.m_landAudioSource.clip = this.m_landAudioClip;
@@ -125,20 +118,22 @@ namespace Nidavellir
             if(this.m_isDead)
                 return;
             
-            // we must read if a jump was triggered in Update() although we need it in FixedUpdate() because we otherwise occasionally miss button presses
-            if (this.m_inputProcessor.JumpTriggered)
-                this.m_jumpTriggered = true;
+            this.ApplyGravity(Time.deltaTime); // we have to apply gravity first to make sure the CharacterController.isGrounded property works
+            this.ApplyLocomotion(Time.deltaTime);
+            this.UpdateLookDirection();
+
+            this.m_cinemachineBrain.ManualUpdate();
         }
 
         private void FixedUpdate()
         {
-            if(this.m_isDead)
-                return;
-            this.ApplyGravity(Time.fixedDeltaTime); // we have to apply gravity first to make sure the CharacterController.isGrounded property works
-            this.ApplyLocomotion(Time.fixedDeltaTime);
-            this.UpdateLookDirection();
+            //if(this.m_isDead)
+            //    return;
+            //this.ApplyGravity(Time.fixedDeltaTime); // we have to apply gravity first to make sure the CharacterController.isGrounded property works
+            //this.ApplyLocomotion(Time.fixedDeltaTime);
+            //this.UpdateLookDirection();
 
-            this.m_cinemachineBrain.ManualUpdate();
+            //this.m_cinemachineBrain.ManualUpdate();
         }
 
         private void LateUpdate()
@@ -179,16 +174,12 @@ namespace Nidavellir
                 this.m_runningLoopAudioSource.Stop();
             }
 
-            if (this.m_jumpTriggered)
+            if (this.m_inputProcessor.JumpTriggered && this.m_isGrounded)
             {
-                this.m_jumpTriggered = false;
-                if (this.m_isGrounded)
-                {
-                    this.m_jumpVelocity = this.m_playerData.JumpVelocity;
-                    this.m_hasJumpVelocity = true;
-                    this.m_playJumpAnimation = true;
-                    this.m_jumpAudioSource.Play();
-                }
+                this.m_jumpVelocity = this.m_playerData.JumpVelocity;
+                this.m_hasJumpVelocity = true;
+                this.m_playJumpAnimation = true;
+                m_jumpRandomClipPlayer.PlayRandomOneShot();
             }
         }
 
