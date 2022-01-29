@@ -15,8 +15,8 @@ TagManager:
   - ReversePlayerCamera
   - ForwardPlayer
   - ReversePlayer
-  - 
-  - 
+  - PlayerCollider
+  - Obstacle
   - 
   - 
   - 
