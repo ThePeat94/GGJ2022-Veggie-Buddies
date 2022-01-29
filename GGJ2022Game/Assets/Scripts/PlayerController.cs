@@ -184,10 +184,13 @@ namespace Nidavellir
         {
             if (this.m_inputProcessor.AttackTriggered)
             {
-                Debug.Log($"{this.name} triggered an attack");
                 if (this.m_gun != null)
                 {
                     this.m_gun.Attack();
+                }
+                if (this.m_sword != null)
+                {
+                    this.m_sword.Attack();
                 }
             }
         }
