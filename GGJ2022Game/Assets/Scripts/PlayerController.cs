@@ -1,34 +1,41 @@
 ﻿using Nidavellir.Scriptables;
 using UnityEngine;
+using UnityEngine.Audio;
 
 namespace Nidavellir
 {
     public class PlayerController : MonoBehaviour
     {
         [SerializeField] private PlayerData m_playerData;
+        [SerializeField] private AudioMixerGroup m_audioMixerGroup;
 
         [SerializeField] private AudioClip m_runningLoopAudioClip;
         [SerializeField] private AudioClip m_jumpAudioClip;
         [SerializeField] private AudioClip m_landAudioClip;
+        [SerializeField] private AudioClip m_hurtAudioClip;
 
         private CharacterController m_characterController;
         private InputProcessor m_inputProcessor;
         private Animator m_animator;
-        private AudioSource m_audioSource;
+        private AudioSource m_runningLoopAudioSource;
+        private AudioSource m_jumpAudioSource;
+        private AudioSource m_landAudioSource;
+        private AudioSource m_hurtAudioSource;
 
         private readonly int m_isWalkingHash = Animator.StringToHash("IsWalking");
 
         private bool m_jumpTriggered = false;
-
         private float m_locomotionVelocity = 0f;
         private bool m_isLocomoting;
         private float m_jumpVelocity = 0f;
         private bool m_hasJumpVelocity = false;
-        private bool m_isGrounded = true;
+        private bool m_isGrounded = false;
+        private bool m_touchedGroundAfterSpawn = false;
 
         public void Hurt()
         {
             Debug.Log("Player got hurt.");
+            this.m_hurtAudioSource.Play();
         }
 
         private void Awake()
@@ -36,7 +43,23 @@ namespace Nidavellir
             this.m_inputProcessor = this.GetComponent<InputProcessor>();
             this.m_characterController = this.GetComponent<CharacterController>();
             this.m_animator = this.GetComponent<Animator>();
-            this.m_audioSource = this.GetComponent<AudioSource>();
+
+            this.m_runningLoopAudioSource = this.gameObject.AddComponent<AudioSource>();
+            this.m_runningLoopAudioSource.clip = this.m_runningLoopAudioClip;
+            this.m_runningLoopAudioSource.loop = true;
+            this.m_runningLoopAudioSource.outputAudioMixerGroup = this.m_audioMixerGroup;
+
+            this.m_jumpAudioSource = this.gameObject.AddComponent<AudioSource>();
+            this.m_jumpAudioSource.clip = this.m_jumpAudioClip;
+            this.m_jumpAudioSource.outputAudioMixerGroup = this.m_audioMixerGroup;
+
+            this.m_landAudioSource = this.gameObject.AddComponent<AudioSource>();
+            this.m_landAudioSource.clip = this.m_landAudioClip;
+            this.m_landAudioSource.outputAudioMixerGroup = this.m_audioMixerGroup;
+
+            this.m_hurtAudioSource = this.gameObject.AddComponent<AudioSource>();
+            this.m_hurtAudioSource.clip = this.m_hurtAudioClip;
+            this.m_hurtAudioSource.outputAudioMixerGroup = this.m_audioMixerGroup;
         }
 
         private void Update()
@@ -67,8 +90,11 @@ namespace Nidavellir
             var wasGrounded = this.m_isGrounded;
             this.m_isGrounded = this.m_characterController.isGrounded;
 
-            if (!wasGrounded && this.m_isGrounded)
-                this.m_audioSource.PlayOneShot(this.m_landAudioClip);
+            if (!wasGrounded && this.m_isGrounded && this.m_touchedGroundAfterSpawn)
+                this.m_landAudioSource.Play();
+
+            if (!this.m_touchedGroundAfterSpawn && this.m_isGrounded)
+                this.m_touchedGroundAfterSpawn = true;
 
             this.m_locomotionVelocity = this.m_inputProcessor.RunInput * this.m_playerData.MovementSpeed;
             this.m_isLocomoting = Mathf.Abs(this.m_locomotionVelocity) > Mathf.Epsilon;
@@ -80,21 +106,15 @@ namespace Nidavellir
 
             if (this.m_isGrounded && this.m_isLocomoting)
             {
-                if (!this.m_audioSource.isPlaying)
+                if (!this.m_runningLoopAudioSource.isPlaying)
                 {
-                    this.m_audioSource.clip = m_runningLoopAudioClip;
-                    this.m_audioSource.loop = true;
-                    this.m_audioSource.Play();
+                    this.m_runningLoopAudioSource.Play();
                 }
             }
-            else if (this.m_audioSource.isPlaying)
+            else if (this.m_runningLoopAudioSource.isPlaying)
             {
-                this.m_audioSource.Stop();
-                this.m_audioSource.loop = false;
-                this.m_audioSource.clip = null;
+                this.m_runningLoopAudioSource.Stop();
             }
-
-            
 
             if (this.m_jumpTriggered)
             {
@@ -103,7 +123,7 @@ namespace Nidavellir
                 {
                     this.m_jumpVelocity = this.m_playerData.JumpVelocity;
                     this.m_hasJumpVelocity = true;
-                    this.m_audioSource.PlayOneShot(this.m_jumpAudioClip);
+                    this.m_jumpAudioSource.Play();
                 }
             }
         }
