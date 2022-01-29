@@ -17,7 +17,8 @@ namespace Nidavellir
         [SerializeField] private CinemachineBrain m_cinemachineBrain;
         [SerializeField] private GameHUD m_hud;
 
-        [SerializeField] private Weapon m_weapon;
+        [SerializeField] private Gun m_gun;
+        [SerializeField] private Sword m_sword;
 
         [SerializeField] private AudioClip m_runningLoopAudioClip;
         [SerializeField] private AudioClip m_landAudioClip;
@@ -184,7 +185,10 @@ namespace Nidavellir
             if (this.m_inputProcessor.AttackTriggered)
             {
                 Debug.Log($"{this.name} triggered an attack");
-                this.m_weapon.Attack();
+                if (this.m_gun != null)
+                {
+                    this.m_gun.Attack();
+                }
             }
         }
 

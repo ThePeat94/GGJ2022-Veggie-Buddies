@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Nidavellir
@@ -14,6 +12,24 @@ namespace Nidavellir
         private void Awake()
         {
             this.m_characterController = GetComponent<CharacterController>();
+        }
+
+        private void OnCollisionEnter(Collision collision)
+        {
+            var projectile = collision.gameObject.GetComponent<Projectile>();
+            if (projectile != null)
+                this.Die();
+        }
+
+        public void OnSwordHit()
+        {
+            this.Die();
+        }
+
+        private void Die()
+        {
+            Destroy(this.gameObject);
+            // TODO: play audio clip
         }
 
         void Update()

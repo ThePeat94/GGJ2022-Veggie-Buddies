@@ -11,9 +11,14 @@ namespace Nidavellir
             this.m_rigidbody = GetComponent<Rigidbody>();
         }
 
-        public void Launch(Vector3 velocity)
+        private void OnCollisionEnter(Collision collision)
         {
-            this.m_rigidbody.velocity = velocity;
+            Destroy(this.gameObject);
+        }
+
+        public void Launch(Vector3 force)
+        {
+            this.m_rigidbody.AddForce(force);
         }
     }
 }
