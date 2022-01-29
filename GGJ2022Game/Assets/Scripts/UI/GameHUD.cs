@@ -8,20 +8,8 @@ namespace Nidavellir.UI
         private static GameHUD s_instance;
         private GameSuccessUI m_gameSuccessUi;
 
-        public static GameHUD Instance => s_instance;
-        
         private void Awake()
         {
-            if (s_instance == null)
-            {
-                s_instance = this;
-            }
-            else
-            {
-                Destroy(this.gameObject);
-                return;
-            }
-
             this.m_gameSuccessUi = this.GetComponentInChildren<GameSuccessUI>();
         }
 
@@ -29,6 +17,12 @@ namespace Nidavellir.UI
         {
             GameStateManager.Instance.OnGameOver += this.OnGameOver;
             GameStateManager.Instance.OnLevelSucceeded += this.OnLevelSucceeded;
+        }
+
+        private void OnDestroy()
+        {
+            GameStateManager.Instance.OnGameOver -= this.OnGameOver;
+            GameStateManager.Instance.OnLevelSucceeded -= this.OnLevelSucceeded;
         }
 
         private void OnLevelSucceeded(object sender, System.EventArgs e)

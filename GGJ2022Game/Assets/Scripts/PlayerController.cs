@@ -1,6 +1,7 @@
 ﻿using System;
 using Nidavellir.Scriptables;
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Audio;
 using Cinemachine;
@@ -37,6 +38,8 @@ namespace Nidavellir
         private bool m_isGrounded = false;
         private bool m_touchedGroundAfterSpawn = false;
 
+        private bool m_isDead;
+
         private EventHandler m_playerDied;
 
         public PlayerType PlayerType => this.m_playerType;
@@ -50,6 +53,7 @@ namespace Nidavellir
         public void PlayerHurt()
         {
             this.m_hurtAudioSource.Play();
+            this.m_isDead = true;
             this.m_playerDied?.Invoke(this, System.EventArgs.Empty);
         }
 
@@ -79,6 +83,9 @@ namespace Nidavellir
 
         private void Update()
         {
+            if(this.m_isDead)
+                return;
+            
             // we must read if a jump was triggered in Update() although we need it in FixedUpdate() because we otherwise occasionally miss button presses
             if (this.m_inputProcessor.JumpTriggered)
                 this.m_jumpTriggered = true;
@@ -86,6 +93,8 @@ namespace Nidavellir
 
         private void FixedUpdate()
         {
+            if(this.m_isDead)
+                return;
             this.ApplyGravity(Time.fixedDeltaTime); // we have to apply gravity first to make sure the CharacterController.isGrounded property works
             this.ApplyLocomotion(Time.fixedDeltaTime);
             this.UpdateLookDirection();
@@ -95,6 +104,8 @@ namespace Nidavellir
 
         private void LateUpdate()
         {
+            if(this.m_isDead)
+                return;
             this.UpdateAnimator();
         }
 
