@@ -58,6 +58,7 @@ GameObject:
   - component: {fileID: 8020778280605679209}
   - component: {fileID: 8020778280605679215}
   - component: {fileID: 8020778280605679208}
+  - component: {fileID: 4179661305980513098}
   - component: {fileID: 1257601104556692128}
   m_Layer: 8
   m_Name: Player
@@ -153,9 +154,26 @@ MonoBehaviour:
   m_cinemachineBrain: {fileID: 0}
   m_hud: {fileID: 0}
   m_runningLoopAudioClip: {fileID: 8300000, guid: 66e7615a9a1f841cba3f6a4be79aaf74, type: 3}
-  m_jumpAudioClip: {fileID: 8300000, guid: dc6bc818f015c4b4c8909e45c208e9fb, type: 3}
   m_landAudioClip: {fileID: 8300000, guid: 9d9b67b914dcb4ca9a51951d729ebbe2, type: 3}
   m_hurtAudioClip: {fileID: 8300000, guid: a143c1a3ca84141e1a6293cc6156b73c, type: 3}
+--- !u!114 &4179661305980513098
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8020778280605679214}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc91a6e7ff62db440b123bf22168b012, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_concurrentPlyback: 1
+  m_audioClips:
+  - {fileID: 8300000, guid: dc6bc818f015c4b4c8909e45c208e9fb, type: 3}
+  - {fileID: 8300000, guid: a78872a65425748b2bc874ae3c907215, type: 3}
+  - {fileID: 8300000, guid: 679ad47cd90634e89985571c463f96fe, type: 3}
+  m_audioMixerGroup: {fileID: 8433430384898204005, guid: 388f718078838d441a5f6db835181182, type: 2}
 --- !u!54 &1257601104556692128
 Rigidbody:
   m_ObjectHideFlags: 0
