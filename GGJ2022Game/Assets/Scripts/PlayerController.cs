@@ -1,6 +1,7 @@
 ﻿using System;
 using Nidavellir.Scriptables;
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Audio;
 using Cinemachine;
@@ -31,7 +32,8 @@ namespace Nidavellir
         private AudioSource m_landAudioSource;
         private AudioSource m_hurtAudioSource;
 
-        private readonly int m_isWalkingHash = Animator.StringToHash("IsWalking");
+        private static readonly int s_isWalkingHash = Animator.StringToHash("IsWalking");
+        private static readonly int s_jumpHash = Animator.StringToHash("Jump");
 
         private bool m_jumpTriggered = false;
         private float m_locomotionVelocity = 0f;
@@ -40,6 +42,10 @@ namespace Nidavellir
         private bool m_hasJumpVelocity = false;
         private bool m_isGrounded = false;
         private bool m_touchedGroundAfterSpawn = false;
+
+        private bool m_playJumpAnimation;
+
+        private bool m_isDead;
 
         private EventHandler m_playerDied;
         private Dictionary<ItemKind, int> m_itemCountsByItemKind = new();
@@ -55,6 +61,7 @@ namespace Nidavellir
         public void PlayerHurt()
         {
             this.m_hurtAudioSource.Play();
+            this.m_isDead = true;
             this.m_playerDied?.Invoke(this, System.EventArgs.Empty);
         }
 
@@ -67,6 +74,20 @@ namespace Nidavellir
                     this.m_hud.SetPumpkinSeedCount(this.m_itemCountsByItemKind[ItemKind.PumpkinSeeds]);
                     break;
             }
+        }
+
+        public void RespawnPlayer(Vector3 respawnPosition)
+        {
+            this.StartCoroutine(Respawn(respawnPosition));
+        }
+
+        private IEnumerator Respawn(Vector3 respawnPosition)
+        {
+            this.m_characterController.enabled = false;
+            yield return new WaitForEndOfFrame();
+            this.transform.position = respawnPosition;
+            yield return new WaitForEndOfFrame();
+            this.m_characterController.enabled = true;
         }
 
         private void AddToInventory(ItemKind kind)
@@ -101,6 +122,9 @@ namespace Nidavellir
 
         private void Update()
         {
+            if(this.m_isDead)
+                return;
+            
             // we must read if a jump was triggered in Update() although we need it in FixedUpdate() because we otherwise occasionally miss button presses
             if (this.m_inputProcessor.JumpTriggered)
                 this.m_jumpTriggered = true;
@@ -108,6 +132,8 @@ namespace Nidavellir
 
         private void FixedUpdate()
         {
+            if(this.m_isDead)
+                return;
             this.ApplyGravity(Time.fixedDeltaTime); // we have to apply gravity first to make sure the CharacterController.isGrounded property works
             this.ApplyLocomotion(Time.fixedDeltaTime);
             this.UpdateLookDirection();
@@ -117,6 +143,8 @@ namespace Nidavellir
 
         private void LateUpdate()
         {
+            if(this.m_isDead)
+                return;
             this.UpdateAnimator();
         }
 
@@ -158,6 +186,7 @@ namespace Nidavellir
                 {
                     this.m_jumpVelocity = this.m_playerData.JumpVelocity;
                     this.m_hasJumpVelocity = true;
+                    this.m_playJumpAnimation = true;
                     this.m_jumpAudioSource.Play();
                 }
             }
@@ -187,11 +216,13 @@ namespace Nidavellir
         {
             if (this.m_isGrounded)
             {
-                this.m_animator.SetBool(m_isWalkingHash, this.m_isLocomoting);
+                this.m_animator.SetBool(s_isWalkingHash, this.m_isLocomoting);
             }
-            else if(this.m_hasJumpVelocity)
+            else if(this.m_playJumpAnimation)
             {
                 // set jumping upwards animation
+                this.m_animator.SetTrigger(s_jumpHash);
+                this.m_playJumpAnimation = false;
             }
             else
             {

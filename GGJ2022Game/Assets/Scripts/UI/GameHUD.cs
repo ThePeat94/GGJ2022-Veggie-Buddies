@@ -9,20 +9,8 @@ namespace Nidavellir.UI
         private GameSuccessUI m_gameSuccessUi;
         private PumpkinSeedsDisplay m_pumpkinSeedDisplay;
 
-        public static GameHUD Instance => s_instance;
-        
         private void Awake()
         {
-            if (s_instance == null)
-            {
-                s_instance = this;
-            }
-            else
-            {
-                Destroy(this.gameObject);
-                return;
-            }
-
             this.m_gameSuccessUi = this.GetComponentInChildren<GameSuccessUI>();
             this.m_pumpkinSeedDisplay = this.GetComponentInChildren<PumpkinSeedsDisplay>();
         }
@@ -31,6 +19,12 @@ namespace Nidavellir.UI
         {
             GameStateManager.Instance.OnGameOver += this.OnGameOver;
             GameStateManager.Instance.OnLevelSucceeded += this.OnLevelSucceeded;
+        }
+
+        private void OnDestroy()
+        {
+            GameStateManager.Instance.OnGameOver -= this.OnGameOver;
+            GameStateManager.Instance.OnLevelSucceeded -= this.OnLevelSucceeded;
         }
 
         private void OnLevelSucceeded(object sender, System.EventArgs e)
