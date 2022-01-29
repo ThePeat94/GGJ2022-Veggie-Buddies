@@ -124,6 +124,11 @@ namespace Nidavellir
             this.m_hurtAudioSource = this.gameObject.AddComponent<AudioSource>();
             this.m_hurtAudioSource.clip = this.m_hurtAudioClip;
             this.m_hurtAudioSource.outputAudioMixerGroup = this.m_audioMixerGroup;
+
+            if (this.m_pushAndPullAbility != null)
+            {
+                this.m_pushAndPullAbility.SetControllingGameObject(this.gameObject);
+            }
         }
 
         private void Update()
@@ -190,7 +195,7 @@ namespace Nidavellir
             {
                 if (this.m_inputProcessor.PushPullActivated)
                 {
-                    this.m_pushAndPullAbility.Activate(this.gameObject);
+                    this.m_pushAndPullAbility.Activate();
                 }
 
                 if (this.m_inputProcessor.PushPullDeactivated)
