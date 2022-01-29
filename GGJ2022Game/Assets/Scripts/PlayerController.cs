@@ -17,6 +17,8 @@ namespace Nidavellir
         [SerializeField] private CinemachineBrain m_cinemachineBrain;
         [SerializeField] private GameHUD m_hud;
 
+        [SerializeField] private Weapon m_weapon;
+
         [SerializeField] private AudioClip m_runningLoopAudioClip;
         [SerializeField] private AudioClip m_landAudioClip;
         [SerializeField] private AudioClip m_hurtAudioClip;
@@ -84,8 +86,6 @@ namespace Nidavellir
             this.StartCoroutine(Respawn(respawnPosition));
         }
         
-        
-
         private IEnumerator Respawn(Vector3 respawnPosition)
         {
             this.m_characterController.enabled = false;
@@ -129,20 +129,10 @@ namespace Nidavellir
             
             this.ApplyGravity(Time.deltaTime); // we have to apply gravity first to make sure the CharacterController.isGrounded property works
             this.ApplyLocomotion(Time.deltaTime);
+            this.ExecuteAttack();
             this.UpdateLookDirection();
 
             this.m_cinemachineBrain.ManualUpdate();
-        }
-
-        private void FixedUpdate()
-        {
-            //if(this.m_isDead)
-            //    return;
-            //this.ApplyGravity(Time.fixedDeltaTime); // we have to apply gravity first to make sure the CharacterController.isGrounded property works
-            //this.ApplyLocomotion(Time.fixedDeltaTime);
-            //this.UpdateLookDirection();
-
-            //this.m_cinemachineBrain.ManualUpdate();
         }
 
         private void LateUpdate()
@@ -189,6 +179,15 @@ namespace Nidavellir
                 this.m_hasJumpVelocity = true;
                 this.m_playJumpAnimation = true;
                 m_jumpRandomClipPlayer.PlayRandomOneShot();
+            }
+        }
+
+        private void ExecuteAttack()
+        {
+            if (this.m_inputProcessor.AttackTriggered)
+            {
+                Debug.Log($"{this.name} triggered an attack");
+                this.m_weapon.Attack();
             }
         }
 
