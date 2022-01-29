@@ -130,8 +130,6 @@ namespace Nidavellir
             this.ApplyGravity(Time.deltaTime); // we have to apply gravity first to make sure the CharacterController.isGrounded property works
             this.ApplyLocomotion(Time.deltaTime);
             this.UpdateLookDirection();
-
-            this.m_cinemachineBrain.ManualUpdate();
         }
 
         private void FixedUpdate()
@@ -141,8 +139,6 @@ namespace Nidavellir
             //this.ApplyGravity(Time.fixedDeltaTime); // we have to apply gravity first to make sure the CharacterController.isGrounded property works
             //this.ApplyLocomotion(Time.fixedDeltaTime);
             //this.UpdateLookDirection();
-
-            //this.m_cinemachineBrain.ManualUpdate();
         }
 
         private void LateUpdate()
