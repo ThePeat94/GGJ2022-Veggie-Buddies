@@ -13,6 +13,10 @@ namespace Nidavellir
 
         private void Awake()
         {
+            // TODO: pool the AudioSources. When this.m_concurrentPlyback == true then only different clips will play concurrently
+            // but if we play the same clip twice, the second one will stop the first one (because each clip has a dedicated audiosource)
+            // instead, use a pool of n AudioSources for m clips and then just pool them, so we can have any n clips play at once.
+
             var audioSourcesCount = this.m_concurrentPlyback ? m_audioClips.Length : 1;
             this.m_audioSources = new AudioSource[audioSourcesCount];
 
