@@ -10,7 +10,6 @@ namespace Nidavellir.UI
 
         private void Update()
         {
-            Debug.Log(LevelTimer.Instance.PastTimeSinceStart);
             this.m_timerText.text = string.Format("{0:mm\\:ss\\.fff}", LevelTimer.Instance.PastTimeSinceStart);
         }
     }
