@@ -5,10 +5,11 @@ namespace Nidavellir
 {
     public class HurtingObstacle : MonoBehaviour
     {
-        private void OnCollisionEnter(Collision other)
+        private void OnTriggerEnter(Collider other)
         {
             Debug.Log($"HurtingObstacle collided with: {other.gameObject}");
-            if (other.gameObject.TryGetComponent<PlayerController>(out var controller))
+            var controller = other.gameObject.GetComponentInParent<PlayerController>();
+            if (controller != null)
             {
                 controller.PlayerHurt();
             }

@@ -230,7 +230,7 @@ GameObject:
   - component: {fileID: 370922515}
   - component: {fileID: 370922514}
   - component: {fileID: 370922513}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1992,6 +1992,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4995147574444285525, guid: 13e973abecfaa624da90657307f5bb72, type: 3}
+      propertyPath: m_Radius
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4995147574444285525, guid: 13e973abecfaa624da90657307f5bb72, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6579835936106830261, guid: 13e973abecfaa624da90657307f5bb72, type: 3}
       propertyPath: m_Name
       value: Players
