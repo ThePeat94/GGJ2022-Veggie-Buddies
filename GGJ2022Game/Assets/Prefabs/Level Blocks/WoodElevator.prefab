@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1996021600839326430}
-  - component: {fileID: 1931735735079972092}
+  - component: {fileID: 2427223765060036215}
   m_Layer: 0
   m_Name: WoodElevator
   m_TagString: Untagged
@@ -33,7 +33,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1931735735079972092
+--- !u!114 &2427223765060036215
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -42,10 +42,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2173759257844486146}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60e356745c3829843973fde873bd4b7e, type: 3}
+  m_Script: {fileID: 11500000, guid: 629934aacd7ce2d4d87712bcd84dfeeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_startDelay: 0
+  m_startDelay: 1
   m_duration: 1
   m_height: 8
 --- !u!1001 &7226898239582564506

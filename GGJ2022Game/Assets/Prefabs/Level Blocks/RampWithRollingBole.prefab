@@ -111,7 +111,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2099450650989836107}
   - component: {fileID: 2099450650989836101}
-  - component: {fileID: 2099450650989836106}
+  - component: {fileID: 8483859469727365027}
   m_Layer: 0
   m_Name: SpawnArea
   m_TagString: Untagged
@@ -147,7 +147,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &2099450650989836106
+--- !u!114 &8483859469727365027
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -156,10 +156,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2099450650989836104}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 93e45d0ac276ca942b0781dba478dc09, type: 3}
+  m_Script: {fileID: 11500000, guid: e1b9410dbdf141d438c69c1604f53d0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_spawnDelay: 2
+  m_spawnDelay: 3
   m_destroyObstacleAfter: 20
   m_obstaclePrefab: {fileID: 2099450649594878300}
   m_spawnPosition: {fileID: 2099450649594878303}
