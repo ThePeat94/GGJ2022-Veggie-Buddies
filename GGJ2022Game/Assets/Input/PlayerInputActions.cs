@@ -177,6 +177,17 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""c98318ef-8ff0-4050-a6a7-d2f19a22282e"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Restart"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""1e3b30bf-ea9d-4d71-9684-83344b4626d5"",
                     ""path"": ""<Keyboard>/escape"",
                     ""interactions"": """",

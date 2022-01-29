@@ -144,7 +144,7 @@ namespace Nidavellir
             
             this.RespawnPlayer(this.m_forwardPlayer);
             this.RespawnPlayer(this.m_backwardPlayer);
-            LevelTimer.Instance.StartStopWatch();
+            LevelTimer.Instance.RestartStopWatch();
         }
 
         private void RespawnPlayer(PlayerController toRespawn)
