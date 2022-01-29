@@ -122,17 +122,23 @@ namespace Nidavellir
             // we must read if a jump was triggered in Update() although we need it in FixedUpdate() because we otherwise occasionally miss button presses
             if (this.m_inputProcessor.JumpTriggered)
                 this.m_jumpTriggered = true;
+
+            this.ApplyGravity(Time.deltaTime); // we have to apply gravity first to make sure the CharacterController.isGrounded property works
+            this.ApplyLocomotion(Time.deltaTime);
+            this.UpdateLookDirection();
+
+            this.m_cinemachineBrain.ManualUpdate();
         }
 
         private void FixedUpdate()
         {
-            if(this.m_isDead)
-                return;
-            this.ApplyGravity(Time.fixedDeltaTime); // we have to apply gravity first to make sure the CharacterController.isGrounded property works
-            this.ApplyLocomotion(Time.fixedDeltaTime);
-            this.UpdateLookDirection();
+            //if(this.m_isDead)
+            //    return;
+            //this.ApplyGravity(Time.fixedDeltaTime); // we have to apply gravity first to make sure the CharacterController.isGrounded property works
+            //this.ApplyLocomotion(Time.fixedDeltaTime);
+            //this.UpdateLookDirection();
 
-            this.m_cinemachineBrain.ManualUpdate();
+            //this.m_cinemachineBrain.ManualUpdate();
         }
 
         private void LateUpdate()
