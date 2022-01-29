@@ -87,7 +87,7 @@ namespace Nidavellir
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
                 return;
             }
-
+            
             var shouldContinue = this.m_levelHasSucceeded && this.m_inputProcessor.RestartTriggered;
             if (shouldContinue)
             {

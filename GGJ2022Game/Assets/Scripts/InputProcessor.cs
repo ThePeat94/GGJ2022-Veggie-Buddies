@@ -16,6 +16,10 @@ namespace Nidavellir
 
         public bool JumpTriggered { get; set; }
 
+        public bool RestartTriggered =>
+            this.m_playerInput.actions["Restart"]
+                .triggered;
+
         private void Awake()
         {
             this.verticalAxisFactor = this.inverseVerticalAxis ? -1f : 1f;
