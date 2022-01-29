@@ -3,6 +3,7 @@ using Nidavellir.Scriptables;
 using System;
 using UnityEngine;
 using UnityEngine.Audio;
+using Cinemachine;
 
 namespace Nidavellir
 {
@@ -16,6 +17,7 @@ namespace Nidavellir
         [SerializeField] private AudioClip m_jumpAudioClip;
         [SerializeField] private AudioClip m_landAudioClip;
         [SerializeField] private AudioClip m_hurtAudioClip;
+        [SerializeField] private CinemachineBrain m_cinemachineBrain;
 
         private CharacterController m_characterController;
         private InputProcessor m_inputProcessor;
@@ -89,6 +91,7 @@ namespace Nidavellir
             this.UpdateLookDirection();
 
             //this.m_jumpVelocity = (this.transform.position - positionAtStartOfFixedUpdate) / Time.fixedDeltaTime;
+            this.m_cinemachineBrain.ManualUpdate();
         }
 
         private void LateUpdate()
