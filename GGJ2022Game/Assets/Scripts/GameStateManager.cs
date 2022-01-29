@@ -18,7 +18,16 @@ namespace Nidavellir
         private bool m_levelHasSucceeded;
         private bool m_forwardPlayerReachedGoal;
         private bool m_backwardPlayerReachedGoal;
-        
+
+        private PlayerController m_forwardPlayer;
+        private PlayerController m_backwardPlayer;
+
+        private Dictionary<PlayerType, Vector3?> m_latestCheckpointPassedPerPlayer = new()
+        {
+            [PlayerType.FORWARD_PLAYER] = null,
+            [PlayerType.BACKWARD_PLAYER] = null
+        };
+
         private EventHandler m_gameOver;
         private EventHandler m_levelSucceeded;
 
@@ -41,27 +50,41 @@ namespace Nidavellir
             if (s_instance == null)
             {
                 s_instance = this;
+                DontDestroyOnLoad(this.gameObject);
             }
             else
             {
-                Destroy(this.gameObject);
+                Destroy(this);
                 return;
-            }
-            
+            } 
+        }
+
+        private void Start()
+        {
+            Debug.Log("Start called");
             SceneManager.sceneLoaded += this.OnSceneLoaded;
-            
-#if UNITY_EDITOR
-            // TODO: Remove when setting up scenes properly
-            this.RegisterPlayerEvents();
-            this.RegisterPlayerGoals();
-#endif
+        }
+
+        private void RegisterPlayerCheckPoints()
+        {
+            var checkPoints = FindObjectsOfType<Checkpoint>();
+            foreach (var checkPoint in checkPoints)
+            {
+                checkPoint.OnPlayerReachedCheckpoint += this.OnyAnyPlayerReachedCheckpoint;
+            }
+        }
+
+        private void OnyAnyPlayerReachedCheckpoint(object sender, PlayerTypeEventArgs e)
+        {
+            Debug.Log($"Setting Respawn for {e.AffectedPlayerType} to {e.RespawnPoint}");
+            this.m_latestCheckpointPassedPerPlayer[e.AffectedPlayerType] = e.RespawnPoint;
         }
 
         private void RegisterPlayerGoals()
         {
             var goals = FindObjectsOfType<PlayerGoal>();
-            var forwardPlayerGoal = goals.FirstOrDefault(g => g.GoalForPlayerType == PlayerType.FORWARD_PLAYER);
-            var backwardPlayerGoal = goals.FirstOrDefault(g => g.GoalForPlayerType == PlayerType.BACKWARD_PLAYER);
+            var forwardPlayerGoal = goals.First(g => g.GoalForPlayerType == PlayerType.FORWARD_PLAYER);
+            var backwardPlayerGoal = goals.First(g => g.GoalForPlayerType == PlayerType.BACKWARD_PLAYER);
             
             forwardPlayerGoal.OnPlayerReachedGoal += this.ForwardPlayerReachedGoal;
             backwardPlayerGoal.OnPlayerReachedGoal += this.BackwardPlayerReachedGoal;
@@ -103,8 +126,24 @@ namespace Nidavellir
             this.m_backwardPlayerReachedGoal = false;
             
             this.RegisterPlayerEvents();
+            this.RegisterPlayerGoals();
+            this.RegisterPlayerCheckPoints();
+
+            var players = FindObjectsOfType<PlayerController>();
+
+            this.m_forwardPlayer = players.First(pc => pc.PlayerType == PlayerType.FORWARD_PLAYER);
+            this.m_backwardPlayer = players.First(pc => pc.PlayerType == PlayerType.BACKWARD_PLAYER);
             
-            // TODO: Load Targets and subscribe to goal reached
+            this.RespawnPlayer(this.m_forwardPlayer);
+            this.RespawnPlayer(this.m_backwardPlayer);
+        }
+
+        private void RespawnPlayer(PlayerController toRespawn)
+        {
+            if (this.m_latestCheckpointPassedPerPlayer[toRespawn.PlayerType].HasValue)
+            {
+                toRespawn.RespawnPlayer(this.m_latestCheckpointPassedPerPlayer[toRespawn.PlayerType].Value);
+            }
         }
 
         private void RegisterPlayerEvents()
@@ -127,6 +166,8 @@ namespace Nidavellir
             if (this.m_forwardPlayerReachedGoal && this.m_backwardPlayerReachedGoal)
             {
                 this.m_levelHasSucceeded = true;
+                this.m_latestCheckpointPassedPerPlayer[PlayerType.FORWARD_PLAYER] = null;
+                this.m_latestCheckpointPassedPerPlayer[PlayerType.BACKWARD_PLAYER] = null;
                 this.m_levelSucceeded?.Invoke(this, System.EventArgs.Empty);
             }
         }

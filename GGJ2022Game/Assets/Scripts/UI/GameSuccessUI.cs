@@ -16,6 +16,16 @@ namespace Nidavellir.UI
         public void ShowGameOverScreen()
         {
             this.m_gameOverScreen.SetActive(true);
+        }    
+        
+        public void HideLevelSucceededScreen()
+        {
+            this.m_levelSucceededScreen.SetActive(false);
+        }
+
+        public void HideGameOverScreen()
+        {
+            this.m_gameOverScreen.SetActive(false);
         }
     }
 }
