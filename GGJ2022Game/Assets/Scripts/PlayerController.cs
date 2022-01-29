@@ -32,7 +32,6 @@ namespace Nidavellir
         private static readonly int s_isWalkingHash = Animator.StringToHash("IsWalking");
         private static readonly int s_jumpHash = Animator.StringToHash("Jump");
 
-        private bool m_jumpTriggered = false;
         private float m_locomotionVelocity = 0f;
         private bool m_isLocomoting;
         private float m_jumpVelocity = 0f;
@@ -119,10 +118,6 @@ namespace Nidavellir
             if(this.m_isDead)
                 return;
             
-            // we must read if a jump was triggered in Update() although we need it in FixedUpdate() because we otherwise occasionally miss button presses
-            if (this.m_inputProcessor.JumpTriggered)
-                this.m_jumpTriggered = true;
-
             this.ApplyGravity(Time.deltaTime); // we have to apply gravity first to make sure the CharacterController.isGrounded property works
             this.ApplyLocomotion(Time.deltaTime);
             this.UpdateLookDirection();
@@ -179,16 +174,12 @@ namespace Nidavellir
                 this.m_runningLoopAudioSource.Stop();
             }
 
-            if (this.m_jumpTriggered)
+            if (this.m_inputProcessor.JumpTriggered && this.m_isGrounded)
             {
-                this.m_jumpTriggered = false;
-                if (this.m_isGrounded)
-                {
-                    this.m_jumpVelocity = this.m_playerData.JumpVelocity;
-                    this.m_hasJumpVelocity = true;
-                    this.m_playJumpAnimation = true;
-                    m_jumpRandomClipPlayer.PlayRandomOneShot();
-                }
+                this.m_jumpVelocity = this.m_playerData.JumpVelocity;
+                this.m_hasJumpVelocity = true;
+                this.m_playJumpAnimation = true;
+                m_jumpRandomClipPlayer.PlayRandomOneShot();
             }
         }
 
