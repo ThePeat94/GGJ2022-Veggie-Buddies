@@ -38,7 +38,9 @@ namespace Nidavellir
         private bool m_touchedGroundAfterSpawn = false;
 
         private EventHandler m_playerDied;
+
         public PlayerType PlayerType => this.m_playerType;
+
         public event EventHandler OnPlayerDied
         {
             add => this.m_playerDied += value;
@@ -77,20 +79,17 @@ namespace Nidavellir
 
         private void Update()
         {
-            // we must read if a jump was triggered Update() although we need it in FixedUpdate() because we otherwise occasionally miss button presses
+            // we must read if a jump was triggered in Update() although we need it in FixedUpdate() because we otherwise occasionally miss button presses
             if (this.m_inputProcessor.JumpTriggered)
                 this.m_jumpTriggered = true;
         }
 
         private void FixedUpdate()
         {
-            //var positionAtStartOfFixedUpdate = this.transform.position;
-
             this.ApplyGravity(Time.fixedDeltaTime); // we have to apply gravity first to make sure the CharacterController.isGrounded property works
             this.ApplyLocomotion(Time.fixedDeltaTime);
             this.UpdateLookDirection();
 
-            //this.m_jumpVelocity = (this.transform.position - positionAtStartOfFixedUpdate) / Time.fixedDeltaTime;
             this.m_cinemachineBrain.ManualUpdate();
         }
 
