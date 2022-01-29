@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Nidavellir.EventArgs;
@@ -56,13 +55,12 @@ namespace Nidavellir
             {
                 Destroy(this);
                 return;
-            } 
-            SceneManager.sceneLoaded += this.OnSceneLoaded;
+            }
         }
 
         private void Start()
         {
-            Debug.Log("Start called");
+            SceneManager.sceneLoaded += this.OnSceneLoaded;
         }
 
         private void RegisterPlayerCheckPoints()
@@ -146,6 +144,7 @@ namespace Nidavellir
             
             this.RespawnPlayer(this.m_forwardPlayer);
             this.RespawnPlayer(this.m_backwardPlayer);
+            LevelTimer.Instance.StartStopWatch();
         }
 
         private void RespawnPlayer(PlayerController toRespawn)
@@ -178,6 +177,7 @@ namespace Nidavellir
                 this.m_levelHasSucceeded = true;
                 this.m_latestCheckpointPassedPerPlayer[PlayerType.FORWARD_PLAYER] = null;
                 this.m_latestCheckpointPassedPerPlayer[PlayerType.BACKWARD_PLAYER] = null;
+                LevelTimer.Instance.StopStopWatch();
                 this.m_levelSucceeded?.Invoke(this, System.EventArgs.Empty);
             }
         }
