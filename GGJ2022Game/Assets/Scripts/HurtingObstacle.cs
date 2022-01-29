@@ -9,7 +9,7 @@ namespace Nidavellir
         {
             if (other.gameObject.TryGetComponent<PlayerController>(out var controller))
             {
-                controller.Hurt();
+                controller.PlayerHurt();
             }
         }
     }

@@ -1,4 +1,5 @@
 ﻿using Nidavellir.Scriptables;
+using System;
 using UnityEngine;
 using UnityEngine.Audio;
 
@@ -32,10 +33,18 @@ namespace Nidavellir
         private bool m_isGrounded = false;
         private bool m_touchedGroundAfterSpawn = false;
 
-        public void Hurt()
+        private EventHandler m_playerDied;
+
+        public event EventHandler OnPlayerDied
         {
-            Debug.Log("Player got hurt.");
+            add => this.m_playerDied += value;
+            remove => this.m_playerDied -= value;
+        }
+
+        public void PlayerHurt()
+        {
             this.m_hurtAudioSource.Play();
+            this.m_playerDied?.Invoke(this, System.EventArgs.Empty);
         }
 
         private void Awake()
