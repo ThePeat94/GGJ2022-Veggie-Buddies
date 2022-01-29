@@ -16,6 +16,13 @@ namespace Nidavellir
             this.m_characterController = GetComponent<CharacterController>();
         }
 
+        private void OnCollisionEnter(Collision collision)
+        {
+            var projectile = collision.gameObject.GetComponent<Projectile>();
+            if (projectile != null)
+                Destroy(this.gameObject);
+        }
+
         void Update()
         {
             var dist = -this.m_amplitude * this.m_frequency * Mathf.Sin(Time.time * m_frequency);
