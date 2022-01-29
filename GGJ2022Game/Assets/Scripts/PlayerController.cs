@@ -32,7 +32,8 @@ namespace Nidavellir
         private AudioSource m_landAudioSource;
         private AudioSource m_hurtAudioSource;
 
-        private readonly int m_isWalkingHash = Animator.StringToHash("IsWalking");
+        private static readonly int s_isWalkingHash = Animator.StringToHash("IsWalking");
+        private static readonly int s_jumpHash = Animator.StringToHash("Jump");
 
         private bool m_jumpTriggered = false;
         private float m_locomotionVelocity = 0f;
@@ -41,6 +42,8 @@ namespace Nidavellir
         private bool m_hasJumpVelocity = false;
         private bool m_isGrounded = false;
         private bool m_touchedGroundAfterSpawn = false;
+
+        private bool m_playJumpAnimation;
 
         private bool m_isDead;
 
@@ -183,6 +186,7 @@ namespace Nidavellir
                 {
                     this.m_jumpVelocity = this.m_playerData.JumpVelocity;
                     this.m_hasJumpVelocity = true;
+                    this.m_playJumpAnimation = true;
                     this.m_jumpAudioSource.Play();
                 }
             }
@@ -212,11 +216,13 @@ namespace Nidavellir
         {
             if (this.m_isGrounded)
             {
-                this.m_animator.SetBool(m_isWalkingHash, this.m_isLocomoting);
+                this.m_animator.SetBool(s_isWalkingHash, this.m_isLocomoting);
             }
-            else if(this.m_hasJumpVelocity)
+            else if(this.m_playJumpAnimation)
             {
                 // set jumping upwards animation
+                this.m_animator.SetTrigger(s_jumpHash);
+                this.m_playJumpAnimation = false;
             }
             else
             {
