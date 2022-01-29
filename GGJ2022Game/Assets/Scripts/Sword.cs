@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Audio;
 
 namespace Nidavellir
@@ -9,8 +8,7 @@ namespace Nidavellir
         [SerializeField] private AudioClip m_swingAudioClip;
         [SerializeField] private AudioClip m_hitAudioClip;
         [SerializeField] private AudioMixerGroup m_audioMixerGroup;
-
-        private List<AttackTarget> m_targetsInMeleeRange;
+        [SerializeField] private ReachableTargetDetector m_reachableTargetDetector;
 
         private AudioSource m_swingAudioSource;
         private AudioSource m_hitAudioSource;
@@ -24,37 +22,17 @@ namespace Nidavellir
             this.m_swingAudioSource = this.gameObject.AddComponent<AudioSource>();
             this.m_swingAudioSource.clip = this.m_swingAudioClip;
             this.m_swingAudioSource.outputAudioMixerGroup = this.m_audioMixerGroup;
-
-            this.m_targetsInMeleeRange = new List<AttackTarget>();
-        }
-
-        private void OnTriggerEnter(Collider other)
-        {
-            var target = other.GetComponent<AttackTarget>();
-            Debug.Log($"OnTriggerEnter {target}");
-            if (target != null)
-            {
-                m_targetsInMeleeRange.Add(target);
-            }
-        }
-
-        private void OnTriggerExit(Collider other)
-        {
-            var target = other.GetComponent<AttackTarget>();
-            Debug.Log($"OnTriggerExit {target}");
-            if (target != null)
-            {
-                m_targetsInMeleeRange.Remove(target);
-            }
         }
 
         public void Attack()
         {
             this.m_swingAudioSource.Play();
-            if (this.m_targetsInMeleeRange.Count > 0)
+
+            var attackTargetsInRange =  this.m_reachableTargetDetector.AttackTargetsInRange;
+            if (attackTargetsInRange.Length > 0)
             {
                 this.m_hitAudioSource.Play();
-                foreach (var target in this.m_targetsInMeleeRange)
+                foreach (var target in attackTargetsInRange)
                 {
                     target.Attack();
                 }
