@@ -138,7 +138,7 @@ namespace Nidavellir
         {
             if (this.m_latestCheckpointPassedPerPlayer[toRespawn.PlayerType].HasValue)
             {
-                toRespawn.transform.position = this.m_latestCheckpointPassedPerPlayer[toRespawn.PlayerType].Value;
+                toRespawn.RespawnPlayer(this.m_latestCheckpointPassedPerPlayer[toRespawn.PlayerType].Value);
             }
         }
 

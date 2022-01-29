@@ -399,7 +399,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 370922512}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
@@ -2956,11 +2956,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3537306598952140935, guid: 13e973abecfaa624da90657307f5bb72, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -41.96
+      value: -44.56
       objectReference: {fileID: 0}
     - target: {fileID: 3537306598952140935, guid: 13e973abecfaa624da90657307f5bb72, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 3537306598952140935, guid: 13e973abecfaa624da90657307f5bb72, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2968,7 +2968,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6033241665578711197, guid: 13e973abecfaa624da90657307f5bb72, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.5
+      value: 0.87
       objectReference: {fileID: 0}
     - target: {fileID: 6579835936106830261, guid: 13e973abecfaa624da90657307f5bb72, type: 3}
       propertyPath: m_Name
@@ -3018,33 +3018,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6579835936495231725, guid: 13e973abecfaa624da90657307f5bb72, type: 3}
-      propertyPath: m_CullingMask.m_Bits
-      value: 2999
-      objectReference: {fileID: 0}
-    - target: {fileID: 6579835936934277629, guid: 13e973abecfaa624da90657307f5bb72, type: 3}
-      propertyPath: m_CullingMask.m_Bits
-      value: 2935
-      objectReference: {fileID: 0}
-    - target: {fileID: 7289260967971547456, guid: 13e973abecfaa624da90657307f5bb72, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7620665655768756086, guid: 13e973abecfaa624da90657307f5bb72, type: 3}
-      propertyPath: m_ApplyRootMotion
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7620665655768756087, guid: 13e973abecfaa624da90657307f5bb72, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -46.96
+      value: -49.56
       objectReference: {fileID: 0}
     - target: {fileID: 7620665655768756087, guid: 13e973abecfaa624da90657307f5bb72, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7679409752767422151, guid: 13e973abecfaa624da90657307f5bb72, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2
+      value: 2.37
       objectReference: {fileID: 0}
     - target: {fileID: 7679409752767422151, guid: 13e973abecfaa624da90657307f5bb72, type: 3}
       propertyPath: m_LocalPosition.z

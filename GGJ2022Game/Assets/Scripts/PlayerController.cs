@@ -73,6 +73,20 @@ namespace Nidavellir
             }
         }
 
+        public void RespawnPlayer(Vector3 respawnPosition)
+        {
+            this.StartCoroutine(Respawn(respawnPosition));
+        }
+
+        private IEnumerator Respawn(Vector3 respawnPosition)
+        {
+            this.m_characterController.enabled = false;
+            yield return new WaitForEndOfFrame();
+            this.transform.position = respawnPosition;
+            yield return new WaitForEndOfFrame();
+            this.m_characterController.enabled = true;
+        }
+
         private void AddToInventory(ItemKind kind)
         {
             var currentValue = this.m_itemCountsByItemKind.ContainsKey(kind) ? this.m_itemCountsByItemKind[kind] : 0;
