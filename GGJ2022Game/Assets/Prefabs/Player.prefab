@@ -170,9 +170,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_concurrentPlyback: 1
   m_audioClips:
-  - {fileID: 8300000, guid: dc6bc818f015c4b4c8909e45c208e9fb, type: 3}
-  - {fileID: 8300000, guid: a78872a65425748b2bc874ae3c907215, type: 3}
-  - {fileID: 8300000, guid: 679ad47cd90634e89985571c463f96fe, type: 3}
+  - {fileID: 8300000, guid: 021d56d512200b943b63646c4883a8cb, type: 3}
+  - {fileID: 8300000, guid: 4006ec30dcfeea24b9bc379657f38292, type: 3}
+  - {fileID: 8300000, guid: 38dc318f568ca544dbd9f0dea01dd5ba, type: 3}
   m_audioMixerGroup: {fileID: 8433430384898204005, guid: 388f718078838d441a5f6db835181182, type: 2}
 --- !u!54 &1257601104556692128
 Rigidbody:
