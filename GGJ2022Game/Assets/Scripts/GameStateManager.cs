@@ -50,7 +50,6 @@ namespace Nidavellir
             if (s_instance == null)
             {
                 s_instance = this;
-                SceneManager.sceneLoaded += this.OnSceneLoaded;
                 DontDestroyOnLoad(this.gameObject);
             }
             else
@@ -58,6 +57,12 @@ namespace Nidavellir
                 Destroy(this);
                 return;
             } 
+        }
+
+        private void Start()
+        {
+            Debug.Log("Start called");
+            SceneManager.sceneLoaded += this.OnSceneLoaded;
         }
 
         private void RegisterPlayerCheckPoints()
@@ -78,8 +83,8 @@ namespace Nidavellir
         private void RegisterPlayerGoals()
         {
             var goals = FindObjectsOfType<PlayerGoal>();
-            var forwardPlayerGoal = goals.FirstOrDefault(g => g.GoalForPlayerType == PlayerType.FORWARD_PLAYER);
-            var backwardPlayerGoal = goals.FirstOrDefault(g => g.GoalForPlayerType == PlayerType.BACKWARD_PLAYER);
+            var forwardPlayerGoal = goals.First(g => g.GoalForPlayerType == PlayerType.FORWARD_PLAYER);
+            var backwardPlayerGoal = goals.First(g => g.GoalForPlayerType == PlayerType.BACKWARD_PLAYER);
             
             forwardPlayerGoal.OnPlayerReachedGoal += this.ForwardPlayerReachedGoal;
             backwardPlayerGoal.OnPlayerReachedGoal += this.BackwardPlayerReachedGoal;
@@ -116,7 +121,6 @@ namespace Nidavellir
 
         private void OnSceneLoaded(Scene arg0, LoadSceneMode arg1)
         {
-            Debug.Log("Game State Manager - Scene Loaded");
             this.m_anyPlayerDied = false;
             this.m_forwardPlayerReachedGoal = false;
             this.m_backwardPlayerReachedGoal = false;
