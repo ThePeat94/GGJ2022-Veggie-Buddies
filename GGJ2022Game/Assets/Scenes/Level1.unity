@@ -300,6 +300,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_inputProcessor: {fileID: 512869924}
+  m_defaultKarlSkin: {fileID: 0}
+  m_defaultGudrunSkin: {fileID: 0}
 --- !u!4 &512869926
 Transform:
   m_ObjectHideFlags: 0
@@ -1004,7 +1006,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6579835936495231725, guid: 13e973abecfaa624da90657307f5bb72, type: 3}
       propertyPath: m_CullingMask.m_Bits
-      value: 15287
+      value: 31671
       objectReference: {fileID: 0}
     - target: {fileID: 6579835936495231731, guid: 13e973abecfaa624da90657307f5bb72, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1024,7 +1026,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6579835936934277629, guid: 13e973abecfaa624da90657307f5bb72, type: 3}
       propertyPath: m_CullingMask.m_Bits
-      value: 15223
+      value: 31607
       objectReference: {fileID: 0}
     - target: {fileID: 7620665655768756084, guid: 13e973abecfaa624da90657307f5bb72, type: 3}
       propertyPath: m_hud
