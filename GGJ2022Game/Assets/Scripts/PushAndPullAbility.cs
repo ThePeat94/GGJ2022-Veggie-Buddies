@@ -17,15 +17,22 @@ namespace Nidavellir
             this.m_activelyPushedPulledLayer = LayerMask.NameToLayer("ActivelyPushedPulled");
         }
 
-        private void FixedUpdate()
+        public bool TryPushPull()
         {
+            var result = true;
             if (this.m_active)
             {
                 for (int i = 0; i < m_controlledPushPullables.Length; i++)
                 {
-                    this.m_controlledPushPullables[i].SetPosition(this.transform.position + this.m_pushPullableOffsets[i]);
+                    var pushPullable = this.m_controlledPushPullables[i];
+                    var targetPosition = this.transform.position + this.m_pushPullableOffsets[i];
+                    if (!pushPullable.TrySetTargetPosition(targetPosition))
+                    {
+                        result = false;
+                    }
                 }
             }
+            return result;
         }
 
         internal void Activate()
@@ -38,7 +45,6 @@ namespace Nidavellir
 
             for (int i = 0; i < m_controlledPushPullables.Length; i++)
             {
-                Debug.Log($"{this.m_controlledPushPullables[i]}");
                 var pushPullable = this.m_controlledPushPullables[i];
                 this.m_originalLayers[i] = pushPullable.gameObject.layer;
                 pushPullable.gameObject.layer = this.m_activelyPushedPulledLayer;
@@ -48,7 +54,11 @@ namespace Nidavellir
 
         internal void Deactivate()
         {
-            Debug.Log("PushAndPullAbility.Deactivate()");
+            for (int i = 0; i < m_controlledPushPullables.Length; i++)
+            {
+                this.m_controlledPushPullables[i].gameObject.layer = this.m_originalLayers[i];
+            }
+
             this.m_controlledPushPullables = null;
             this.m_pushPullableOffsets = null;
             this.m_active = false;

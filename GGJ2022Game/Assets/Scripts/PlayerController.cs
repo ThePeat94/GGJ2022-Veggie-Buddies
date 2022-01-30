@@ -224,6 +224,9 @@ namespace Nidavellir
                 {
                     this.m_pushAndPullAbility.Deactivate();
                 }
+
+
+                this.m_pushAndPullAbility.TryPushPull();
             }
         }
 
