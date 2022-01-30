@@ -51,15 +51,6 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "PushPull",
-                    "type": "Button",
-                    "id": "f1b7d2a6-4ae4-4113-b7da-107d90e1db08",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "BackToMenu",
                     "type": "Button",
                     "id": "199411f4-9ad2-4bd9-b9a2-b0fc5d4455ec",
@@ -221,28 +212,6 @@
                     "processors": "",
                     "groups": "",
                     "action": "QuitApplication",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "2dc8ea58-d5b1-4140-a318-4667e2c04900",
-                    "path": "<Keyboard>/p",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "PushPull",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "5a4c3b5f-e386-410d-b137-0eba59462752",
-                    "path": "<Gamepad>/buttonNorth",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "PushPull",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

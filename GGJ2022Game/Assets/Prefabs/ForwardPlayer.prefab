@@ -75,7 +75,6 @@ GameObject:
   - component: {fileID: 2663488587464844826}
   - component: {fileID: 1118118219286208496}
   - component: {fileID: 4832879165877528298}
-  - component: {fileID: 5583833391717036480}
   - component: {fileID: 5843418678525994207}
   m_Layer: 8
   m_Name: ForwardPlayer
@@ -243,19 +242,6 @@ MonoBehaviour:
   m_DefaultActionMap: Actions
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &5583833391717036480
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8194361419507217214}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2bb5cbcfde3fc564dada9ae6ebb0ff7a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_reachableTargetDetector: {fileID: 8911176092202572798}
 --- !u!114 &5843418678525994207
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -582,17 +568,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1452597981445510643, guid: 90c2e167603039a45acc5799fadd8db1, type: 3}
   m_PrefabInstance: {fileID: 5477661586146090703}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &8911176092202572798 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4012227063006774577, guid: 90c2e167603039a45acc5799fadd8db1, type: 3}
-  m_PrefabInstance: {fileID: 5477661586146090703}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c2979fb4af9a8104f93906f2efd63f7d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &7859629650905807077
 PrefabInstance:
   m_ObjectHideFlags: 0
