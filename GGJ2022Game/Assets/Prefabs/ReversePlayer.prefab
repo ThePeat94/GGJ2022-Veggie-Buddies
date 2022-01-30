@@ -62,6 +62,7 @@ GameObject:
   - component: {fileID: 8218808549676916293}
   - component: {fileID: 3435000653392723590}
   - component: {fileID: 71009463498503196}
+  - component: {fileID: 5616974998773984675}
   m_Layer: 9
   m_Name: ReversePlayer
   m_TagString: Untagged
@@ -163,7 +164,8 @@ MonoBehaviour:
   m_explosion: {fileID: 5973471537104185391}
   m_runningLoopAudioClip: {fileID: 8300000, guid: 66e7615a9a1f841cba3f6a4be79aaf74, type: 3}
   m_landAudioClip: {fileID: 8300000, guid: 9d9b67b914dcb4ca9a51951d729ebbe2, type: 3}
-  m_hurtAudioClip: {fileID: 8300000, guid: a143c1a3ca84141e1a6293cc6156b73c, type: 3}
+  m_jumpRandomClipPlayer: {fileID: 8218808549676916293}
+  m_dieRandomClipPlayer: {fileID: 5616974998773984675}
 --- !u!114 &8218808549676916293
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -228,6 +230,22 @@ MonoBehaviour:
   m_DefaultActionMap: Actions
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &5616974998773984675
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2828742552548346721}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc91a6e7ff62db440b123bf22168b012, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_concurrentPlyback: 1
+  m_audioClips:
+  - {fileID: 8300000, guid: a143c1a3ca84141e1a6293cc6156b73c, type: 3}
+  m_audioMixerGroup: {fileID: 8433430384898204005, guid: 388f718078838d441a5f6db835181182, type: 2}
 --- !u!1001 &5973471537113691919
 PrefabInstance:
   m_ObjectHideFlags: 0

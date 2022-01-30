@@ -60,6 +60,7 @@ GameObject:
   - component: {fileID: 8020778280605679208}
   - component: {fileID: 4179661305980513098}
   - component: {fileID: 1257601104556692128}
+  - component: {fileID: 4391611303102325781}
   m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
@@ -151,11 +152,16 @@ MonoBehaviour:
   m_playerData: {fileID: 11400000, guid: ae6bb2db24ba44c4fba36722c273b383, type: 2}
   m_audioMixerGroup: {fileID: 8433430384898204005, guid: 388f718078838d441a5f6db835181182, type: 2}
   m_playerType: 0
-  m_cinemachineBrain: {fileID: 0}
   m_hud: {fileID: 0}
+  m_body: {fileID: 0}
+  m_gun: {fileID: 0}
+  m_sword: {fileID: 0}
+  m_explosion: {fileID: 0}
   m_runningLoopAudioClip: {fileID: 8300000, guid: 66e7615a9a1f841cba3f6a4be79aaf74, type: 3}
   m_landAudioClip: {fileID: 8300000, guid: 9d9b67b914dcb4ca9a51951d729ebbe2, type: 3}
   m_hurtAudioClip: {fileID: 8300000, guid: a143c1a3ca84141e1a6293cc6156b73c, type: 3}
+  m_jumpRandomClipPlayer: {fileID: 4179661305980513098}
+  m_dieRandomClipPlayer: {fileID: 4391611303102325781}
 --- !u!114 &4179661305980513098
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -190,6 +196,24 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &4391611303102325781
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8020778280605679214}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc91a6e7ff62db440b123bf22168b012, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_concurrentPlyback: 0
+  m_audioClips:
+  - {fileID: 8300000, guid: 6cb3e7dabcdc9a447a8aff2b15e8b7d0, type: 3}
+  - {fileID: 8300000, guid: eb801cba2ba3b5640a7aee643979e765, type: 3}
+  - {fileID: 8300000, guid: d489fc408a0b4f447b38cb16dfe1f489, type: 3}
+  m_audioMixerGroup: {fileID: 8433430384898204005, guid: 388f718078838d441a5f6db835181182, type: 2}
 --- !u!1001 &2415601337225890162
 PrefabInstance:
   m_ObjectHideFlags: 0

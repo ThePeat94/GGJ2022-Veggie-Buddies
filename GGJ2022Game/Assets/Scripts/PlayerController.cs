@@ -25,15 +25,14 @@ namespace Nidavellir
 
         [SerializeField] private AudioClip m_runningLoopAudioClip;
         [SerializeField] private AudioClip m_landAudioClip;
-        [SerializeField] private AudioClip m_hurtAudioClip;
+        [SerializeField] private RandomClipPlayer m_jumpRandomClipPlayer;
+        [SerializeField] private RandomClipPlayer m_dieRandomClipPlayer;
 
         private CharacterController m_characterController;
         private InputProcessor m_inputProcessor;
         private Animator m_animator;
-        private RandomClipPlayer m_jumpRandomClipPlayer;
         private AudioSource m_runningLoopAudioSource;
         private AudioSource m_landAudioSource;
-        private AudioSource m_hurtAudioSource;
 
         private static readonly int s_isWalkingHash = Animator.StringToHash("IsWalking");
         private static readonly int s_jumpHash = Animator.StringToHash("Jump");
@@ -56,6 +55,7 @@ namespace Nidavellir
         private Dictionary<ItemKind, int> m_itemCountsByItemKind = new();
 
         public PlayerType PlayerType => this.m_playerType;
+        public float EnvironmentVelocity = 0;
 
         public event EventHandler OnPlayerDied
         {
@@ -68,7 +68,7 @@ namespace Nidavellir
             if (this.m_isDead)
                 return;
 
-            this.m_hurtAudioSource.Play();
+            this.m_dieRandomClipPlayer.PlayRandomOneShot();
             this.m_isDead = true;
             this.StartCoroutine(this.Die());
         }
@@ -133,7 +133,6 @@ namespace Nidavellir
             this.m_inputProcessor = this.GetComponent<InputProcessor>();
             this.m_characterController = this.GetComponent<CharacterController>();
             this.m_animator = this.GetComponent<Animator>();
-            this.m_jumpRandomClipPlayer = this.GetComponent<RandomClipPlayer>();
 
             this.m_runningLoopAudioSource = this.gameObject.AddComponent<AudioSource>();
             this.m_runningLoopAudioSource.clip = this.m_runningLoopAudioClip;
@@ -143,10 +142,6 @@ namespace Nidavellir
             this.m_landAudioSource = this.gameObject.AddComponent<AudioSource>();
             this.m_landAudioSource.clip = this.m_landAudioClip;
             this.m_landAudioSource.outputAudioMixerGroup = this.m_audioMixerGroup;
-
-            this.m_hurtAudioSource = this.gameObject.AddComponent<AudioSource>();
-            this.m_hurtAudioSource.clip = this.m_hurtAudioClip;
-            this.m_hurtAudioSource.outputAudioMixerGroup = this.m_audioMixerGroup;
         }
 
         private void Update()
@@ -182,7 +177,11 @@ namespace Nidavellir
 
             if (this.m_isLocomoting)
             {
-                this.m_characterController.Move(Vector3.right * deltaTime * this.m_locomotionVelocity);
+                this.m_characterController.Move(Vector3.right * deltaTime * (this.m_locomotionVelocity + this.EnvironmentVelocity));
+            }
+            else
+            {
+                this.m_characterController.Move(Vector3.right * deltaTime * this.EnvironmentVelocity);
             }
 
             if (this.m_isGrounded && this.m_isLocomoting)
