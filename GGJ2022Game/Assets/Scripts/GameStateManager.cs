@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Nidavellir.EventArgs;
+using Nidavellir.PlayerShop;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -29,6 +30,8 @@ namespace Nidavellir
 
         private EventHandler m_gameOver;
         private EventHandler m_levelSucceeded;
+        [SerializeField] private ShopItem m_defaultKarlSkin;
+        [SerializeField] private ShopItem m_defaultGudrunSkin;
 
         public static GameStateManager Instance => s_instance;
 
@@ -56,6 +59,12 @@ namespace Nidavellir
                 Destroy(this.gameObject);
                 return;
             }
+            
+            // Default Skins
+            PlayerInventory.Instance.AddShopItem(this.m_defaultKarlSkin);
+            PlayerInventory.Instance.AddShopItem(this.m_defaultGudrunSkin);
+            PlayerInventory.Instance.ActiveKarlSkin = this.m_defaultKarlSkin;
+            PlayerInventory.Instance.ActiveGudrunSkin = this.m_defaultGudrunSkin;
         }
 
         private void Start()
@@ -140,15 +149,14 @@ namespace Nidavellir
             this.m_forwardPlayerReachedGoal = false;
             this.m_backwardPlayerReachedGoal = false;
             
+            var players = FindObjectsOfType<PlayerController>();
+            this.m_forwardPlayer = players.First(pc => pc.PlayerType == PlayerType.FORWARD_PLAYER);
+            this.m_backwardPlayer = players.First(pc => pc.PlayerType == PlayerType.BACKWARD_PLAYER);
+            
             this.RegisterPlayerEvents();
             this.RegisterPlayerGoals();
             this.RegisterPlayerCheckPoints();
 
-            var players = FindObjectsOfType<PlayerController>();
-
-            this.m_forwardPlayer = players.First(pc => pc.PlayerType == PlayerType.FORWARD_PLAYER);
-            this.m_backwardPlayer = players.First(pc => pc.PlayerType == PlayerType.BACKWARD_PLAYER);
-            
             this.RespawnPlayer(this.m_forwardPlayer);
             this.RespawnPlayer(this.m_backwardPlayer);
             LevelTimer.Instance.RestartStopWatch();
@@ -164,16 +172,21 @@ namespace Nidavellir
 
         private void RegisterPlayerEvents()
         {
-            var playerControllers = FindObjectsOfType<PlayerController>();
-            foreach (var playerController in playerControllers)
-            {
-                playerController.OnPlayerDied += this.AnyPlayerDied;
-            }
+            this.m_forwardPlayer.OnPlayerDied += this.KarlPlayerDied;
+            this.m_backwardPlayer.OnPlayerDied += this.GudrunPlayerDied;
         }
 
-        private void AnyPlayerDied(object sender, System.EventArgs e)
+        private void KarlPlayerDied(object sender, System.EventArgs e)
         {
             this.m_anyPlayerDied = true;
+            this.m_backwardPlayer.PreventMovement();
+            this.m_gameOver?.Invoke(this, System.EventArgs.Empty);
+        }        
+        
+        private void GudrunPlayerDied(object sender, System.EventArgs e)
+        {
+            this.m_anyPlayerDied = true;
+            this.m_forwardPlayer.PreventMovement();
             this.m_gameOver?.Invoke(this, System.EventArgs.Empty);
         }
 

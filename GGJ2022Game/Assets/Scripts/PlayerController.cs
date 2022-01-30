@@ -25,20 +25,18 @@ namespace Nidavellir
 
         [SerializeField] private AudioClip m_runningLoopAudioClip;
         [SerializeField] private AudioClip m_landAudioClip;
-        [SerializeField] private AudioClip m_hurtAudioClip;
+        [SerializeField] private RandomClipPlayer m_jumpRandomClipPlayer;
+        [SerializeField] private RandomClipPlayer m_dieRandomClipPlayer;
 
         private CharacterController m_characterController;
         private InputProcessor m_inputProcessor;
         private Animator m_animator;
-        private PushAndPullAbility m_pushAndPullAbility;
-        private RandomClipPlayer m_jumpRandomClipPlayer;
         private AudioSource m_runningLoopAudioSource;
         private AudioSource m_landAudioSource;
-        private AudioSource m_hurtAudioSource;
 
         private static readonly int s_isWalkingHash = Animator.StringToHash("IsWalking");
         private static readonly int s_jumpHash = Animator.StringToHash("Jump");
-        private static readonly int s_isDead = Animator.StringToHash("IsDead");
+        private static readonly int s_die = Animator.StringToHash("Die");
         private static readonly int s_explode = Animator.StringToHash("Explode");
 
         private float m_locomotionVelocity = 0f;
@@ -51,11 +49,13 @@ namespace Nidavellir
         private bool m_playJumpAnimation;
 
         private bool m_isDead;
+        private bool m_preventMovement;
 
         private EventHandler m_playerDied;
         private Dictionary<ItemKind, int> m_itemCountsByItemKind = new();
 
         public PlayerType PlayerType => this.m_playerType;
+        public float EnvironmentVelocity = 0;
 
         public event EventHandler OnPlayerDied
         {
@@ -68,7 +68,7 @@ namespace Nidavellir
             if (this.m_isDead)
                 return;
 
-            this.m_hurtAudioSource.Play();
+            this.m_dieRandomClipPlayer.PlayRandomOneShot();
             this.m_isDead = true;
             this.StartCoroutine(this.Die());
         }
@@ -83,7 +83,7 @@ namespace Nidavellir
             switch (itemKind)
             {
                 case ItemKind.PumpkinSeeds:
-                    AddToInventory(itemKind);
+                    this.AddToInventory(itemKind);
                     this.m_hud.SetPumpkinSeedCount(this.m_itemCountsByItemKind[ItemKind.PumpkinSeeds]);
                     break;
             }
@@ -96,7 +96,7 @@ namespace Nidavellir
         
         private IEnumerator Die()
         {
-            this.m_animator.SetBool(s_isDead, true);
+            this.m_animator.SetTrigger(s_die);
             this.m_runningLoopAudioSource.Stop();
             this.m_landAudioSource.Stop();
             
@@ -120,13 +120,12 @@ namespace Nidavellir
             yield return new WaitForEndOfFrame();
             this.m_characterController.enabled = true;
             this.m_body.SetActive(true);
-            this.m_animator.SetBool(s_isDead, false);
         }
 
         private void AddToInventory(ItemKind kind)
         {
             var currentValue = this.m_itemCountsByItemKind.ContainsKey(kind) ? this.m_itemCountsByItemKind[kind] : 0;
-            m_itemCountsByItemKind[kind] = currentValue + 1;
+            this.m_itemCountsByItemKind[kind] = currentValue + 1;
         }
 
         private void Awake()
@@ -134,8 +133,6 @@ namespace Nidavellir
             this.m_inputProcessor = this.GetComponent<InputProcessor>();
             this.m_characterController = this.GetComponent<CharacterController>();
             this.m_animator = this.GetComponent<Animator>();
-            this.m_jumpRandomClipPlayer = this.GetComponent<RandomClipPlayer>();
-            this.m_pushAndPullAbility = this.GetComponent<PushAndPullAbility>();
 
             this.m_runningLoopAudioSource = this.gameObject.AddComponent<AudioSource>();
             this.m_runningLoopAudioSource.clip = this.m_runningLoopAudioClip;
@@ -145,26 +142,21 @@ namespace Nidavellir
             this.m_landAudioSource = this.gameObject.AddComponent<AudioSource>();
             this.m_landAudioSource.clip = this.m_landAudioClip;
             this.m_landAudioSource.outputAudioMixerGroup = this.m_audioMixerGroup;
-
-            this.m_hurtAudioSource = this.gameObject.AddComponent<AudioSource>();
-            this.m_hurtAudioSource.clip = this.m_hurtAudioClip;
-            this.m_hurtAudioSource.outputAudioMixerGroup = this.m_audioMixerGroup;
         }
 
         private void Update()
         {
-            if(this.m_isDead)
+            if(this.m_isDead || this.m_preventMovement)
                 return;
             
             this.ApplyGravity(Time.deltaTime); // we have to apply gravity first to make sure the CharacterController.isGrounded property works
             this.ApplyLocomotion(Time.deltaTime);
             this.ExecuteAttack();
-            this.ExecutePushAndPullAbility();
             this.UpdateLookDirection();
         }
         private void LateUpdate()
         {
-            if(this.m_isDead)
+            if(this.m_isDead || this.m_preventMovement)
                 return;
             this.UpdateAnimator();
         }
@@ -185,7 +177,11 @@ namespace Nidavellir
 
             if (this.m_isLocomoting)
             {
-                this.m_characterController.Move(Vector3.right * deltaTime * this.m_locomotionVelocity);
+                this.m_characterController.Move(Vector3.right * deltaTime * (this.m_locomotionVelocity + this.EnvironmentVelocity));
+            }
+            else
+            {
+                this.m_characterController.Move(Vector3.right * deltaTime * this.EnvironmentVelocity);
             }
 
             if (this.m_isGrounded && this.m_isLocomoting)
@@ -206,23 +202,6 @@ namespace Nidavellir
                 this.m_hasJumpVelocity = true;
                 this.m_playJumpAnimation = true;
                 m_jumpRandomClipPlayer.PlayRandomOneShot();
-            }
-        }
-
-        private void ExecutePushAndPullAbility()
-        {
-            if (this.m_pushAndPullAbility != null)
-            {
-                if (this.m_inputProcessor.PushPullActivated)
-                {
-                    Debug.Log("this.m_pushAndPullAbility.Activate();");
-                    this.m_pushAndPullAbility.Activate();
-                }
-
-                if (this.m_inputProcessor.PushPullDeactivated)
-                {
-                    this.m_pushAndPullAbility.Deactivate();
-                }
             }
         }
 
@@ -279,5 +258,9 @@ namespace Nidavellir
             }
         }
 
+        public void PreventMovement()
+        {
+            this.m_preventMovement = true;
+        }
     }
 }

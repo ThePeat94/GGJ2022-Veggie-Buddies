@@ -8,10 +8,10 @@ namespace Nidavellir
         private void OnTriggerEnter(Collider other)
         {
             Debug.Log($"HurtingObstacle triggered by: {other.gameObject}");
-            var controller = other.gameObject.GetComponentInParent<PlayerController>();
-            if (controller != null)
+            var collider = other.gameObject.GetComponent<PlayerCollider>();
+            if (collider != null)
             {
-                controller.PlayerHurt();
+                collider.PlayerController.PlayerHurt();
             }
         }
     }

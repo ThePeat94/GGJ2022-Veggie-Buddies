@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_playerType: 0
   m_currencyCost: 10
-  m_id: 1
-  m_gameObjectToLoad: {fileID: 0}
+  m_id: 4
   m_name: Reverse Karl
   m_image: {fileID: 21300000, guid: a2b48aa50ca8531479af8cf59c8c442c, type: 3}
+  m_bodyMaterial: {fileID: 2100000, guid: d00a9ae251a9ad34faa1c27a45811656, type: 2}
+  m_pantsMaterial: {fileID: 2100000, guid: 9d03c96453ff1604d986bc2f20c6e445, type: 2}
+  m_eyesMaterial: {fileID: 2100000, guid: 9d03c96453ff1604d986bc2f20c6e445, type: 2}

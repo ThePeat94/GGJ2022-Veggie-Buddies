@@ -14,7 +14,7 @@ namespace Nidavellir
                 return;
 
             Debug.Log($"DestoryOnHit triggered by: {other.gameObject}");
-            var controller = other.gameObject.GetComponentInParent<PlayerController>();
+            var controller = other.gameObject.GetComponent<PlayerController>();
             if (controller != null)
             {
                 this.m_destroying = this.StartCoroutine(this.DestroyRoutine());

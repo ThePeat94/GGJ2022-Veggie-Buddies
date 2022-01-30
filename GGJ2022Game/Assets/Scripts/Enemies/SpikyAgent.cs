@@ -9,13 +9,15 @@ namespace Nidavellir
         [SerializeField] private float m_frequency;
         [SerializeField] private float m_amplitude;
 
-        private CharacterController m_characterController;
         private AttackTarget m_attackTarget;
 
         private void Awake()
         {
-            this.m_characterController = GetComponent<CharacterController>();
             this.m_attackTarget = GetComponent<AttackTarget>();
+        }
+
+        private void Start()
+        {
             this.m_attackTarget.onAttacked.AddListener(this.OnAttacked);
         }
 
@@ -25,10 +27,10 @@ namespace Nidavellir
             Destroy(this.gameObject);
         }
 
-        void Update()
+        void FixedUpdate()
         {
-            var dist = -this.m_amplitude * this.m_frequency * Mathf.Sin(Time.time * m_frequency);
-            this.m_characterController.Move(Vector3.right * Time.deltaTime * dist);
+            var velocity = -this.m_amplitude * this.m_frequency * Mathf.Sin(Time.timeSinceLevelLoad * m_frequency);
+            this.transform.Translate(Vector3.right * Time.fixedDeltaTime * velocity, Space.World);
         }
     }
 }

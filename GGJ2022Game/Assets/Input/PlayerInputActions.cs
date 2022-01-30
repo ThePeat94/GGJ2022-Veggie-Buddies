@@ -73,15 +73,6 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""PushPull"",
-                    ""type"": ""Button"",
-                    ""id"": ""f1b7d2a6-4ae4-4113-b7da-107d90e1db08"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""BackToMenu"",
                     ""type"": ""Button"",
                     ""id"": ""199411f4-9ad2-4bd9-b9a2-b0fc5d4455ec"",
@@ -248,28 +239,6 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""2dc8ea58-d5b1-4140-a318-4667e2c04900"",
-                    ""path"": ""<Keyboard>/p"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""PushPull"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""5a4c3b5f-e386-410d-b137-0eba59462752"",
-                    ""path"": ""<Gamepad>/buttonNorth"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""PushPull"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""6c5dda9e-77ff-4b5e-8448-c9159a69f4ec"",
                     ""path"": ""<Keyboard>/enter"",
                     ""interactions"": """",
@@ -302,7 +271,6 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         m_Actions_Restart = m_Actions.FindAction("Restart", throwIfNotFound: true);
         m_Actions_QuitApplication = m_Actions.FindAction("QuitApplication", throwIfNotFound: true);
         m_Actions_Attack = m_Actions.FindAction("Attack", throwIfNotFound: true);
-        m_Actions_PushPull = m_Actions.FindAction("PushPull", throwIfNotFound: true);
         m_Actions_BackToMenu = m_Actions.FindAction("BackToMenu", throwIfNotFound: true);
     }
 
@@ -368,7 +336,6 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_Actions_Restart;
     private readonly InputAction m_Actions_QuitApplication;
     private readonly InputAction m_Actions_Attack;
-    private readonly InputAction m_Actions_PushPull;
     private readonly InputAction m_Actions_BackToMenu;
     public struct ActionsActions
     {
@@ -379,7 +346,6 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         public InputAction @Restart => m_Wrapper.m_Actions_Restart;
         public InputAction @QuitApplication => m_Wrapper.m_Actions_QuitApplication;
         public InputAction @Attack => m_Wrapper.m_Actions_Attack;
-        public InputAction @PushPull => m_Wrapper.m_Actions_PushPull;
         public InputAction @BackToMenu => m_Wrapper.m_Actions_BackToMenu;
         public InputActionMap Get() { return m_Wrapper.m_Actions; }
         public void Enable() { Get().Enable(); }
@@ -405,9 +371,6 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @Attack.started -= m_Wrapper.m_ActionsActionsCallbackInterface.OnAttack;
                 @Attack.performed -= m_Wrapper.m_ActionsActionsCallbackInterface.OnAttack;
                 @Attack.canceled -= m_Wrapper.m_ActionsActionsCallbackInterface.OnAttack;
-                @PushPull.started -= m_Wrapper.m_ActionsActionsCallbackInterface.OnPushPull;
-                @PushPull.performed -= m_Wrapper.m_ActionsActionsCallbackInterface.OnPushPull;
-                @PushPull.canceled -= m_Wrapper.m_ActionsActionsCallbackInterface.OnPushPull;
                 @BackToMenu.started -= m_Wrapper.m_ActionsActionsCallbackInterface.OnBackToMenu;
                 @BackToMenu.performed -= m_Wrapper.m_ActionsActionsCallbackInterface.OnBackToMenu;
                 @BackToMenu.canceled -= m_Wrapper.m_ActionsActionsCallbackInterface.OnBackToMenu;
@@ -430,9 +393,6 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @Attack.started += instance.OnAttack;
                 @Attack.performed += instance.OnAttack;
                 @Attack.canceled += instance.OnAttack;
-                @PushPull.started += instance.OnPushPull;
-                @PushPull.performed += instance.OnPushPull;
-                @PushPull.canceled += instance.OnPushPull;
                 @BackToMenu.started += instance.OnBackToMenu;
                 @BackToMenu.performed += instance.OnBackToMenu;
                 @BackToMenu.canceled += instance.OnBackToMenu;
@@ -447,7 +407,6 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         void OnRestart(InputAction.CallbackContext context);
         void OnQuitApplication(InputAction.CallbackContext context);
         void OnAttack(InputAction.CallbackContext context);
-        void OnPushPull(InputAction.CallbackContext context);
         void OnBackToMenu(InputAction.CallbackContext context);
     }
 }
