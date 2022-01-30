@@ -20,6 +20,7 @@ namespace Nidavellir
 
         public bool RestartTriggered => this.m_playerInput.actions["Restart"].triggered;
         public bool QuitTriggered => this.m_playerInput.actions["QuitApplication"].triggered;
+        public bool BackToMenuTriggered => this.m_playerInput.actions["BackToMenu"].triggered;
 
         private void Awake()
         {

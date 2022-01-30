@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -41,14 +42,21 @@ namespace Nidavellir.PlayerShop.UI
             this.m_activateButton.gameObject.SetActive(alreadyBought);
             this.m_buyButton.gameObject.SetActive(!alreadyBought);
 
-            if(this.m_data.PlayerType == PlayerType.FORWARD_PLAYER)
+            if (this.m_data.PlayerType == PlayerType.FORWARD_PLAYER)
                 this.m_buyButton.interactable = PlayerInventory.Instance.ActiveKarlSkin == this.m_data;
-            else if(this.m_data.PlayerType == PlayerType.BACKWARD_PLAYER)
+            else if (this.m_data.PlayerType == PlayerType.BACKWARD_PLAYER)
                 this.m_buyButton.interactable = PlayerInventory.Instance.ActiveGudrunSkin == this.m_data;
 
             var canStillAfford = PlayerInventory.Instance.CurrencyAmount >= this.m_data.Cost;
             this.m_costText.color = canStillAfford ? Color.green : Color.red;
             this.m_buyButton.interactable = canStillAfford;
+
+
+        }
+
+        private void OnDestroy()
+        {
+            PlayerInventory.Instance.OnInventoryChanged -= this.InventoryChanged;
         }
 
         public void BuyShopItem()

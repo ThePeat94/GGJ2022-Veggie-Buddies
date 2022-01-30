@@ -53,7 +53,7 @@ namespace Nidavellir
             }
             else
             {
-                Destroy(this);
+                Destroy(this.gameObject);
                 return;
             }
         }
@@ -107,7 +107,14 @@ namespace Nidavellir
                 Application.Quit();
                 return;
             }
-            
+
+            var shouldGoBackToMainMenu = (this.m_anyPlayerDied || this.m_levelHasSucceeded) && this.m_inputProcessor.BackToMenuTriggered;
+            if (shouldGoBackToMainMenu)
+            {
+                SceneManager.LoadScene(0);
+                return;
+            }
+
             var shouldRestart = this.m_anyPlayerDied && this.m_inputProcessor.RestartTriggered;
             if (shouldRestart)
             {

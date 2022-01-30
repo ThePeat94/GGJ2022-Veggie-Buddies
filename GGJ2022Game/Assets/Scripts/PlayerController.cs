@@ -99,11 +99,16 @@ namespace Nidavellir
             this.m_animator.SetBool(s_isDead, true);
             this.m_runningLoopAudioSource.Stop();
             this.m_landAudioSource.Stop();
-            yield return new WaitForSeconds(0.5f);
-            this.m_explosion.SetTrigger(s_explode);
-            yield return new WaitForSeconds(0.2f);
-            this.m_body.SetActive(false);
-            yield return new WaitForSeconds(1.0f);
+            
+            if (this.m_explosion != null)
+            {
+                yield return new WaitForSeconds(0.5f);
+                this.m_explosion.SetTrigger(s_explode);
+                yield return new WaitForSeconds(0.2f);
+                this.m_body.SetActive(false);
+                yield return new WaitForSeconds(1.0f);
+            }
+
             this.m_playerDied?.Invoke(this, System.EventArgs.Empty);
         }
 
