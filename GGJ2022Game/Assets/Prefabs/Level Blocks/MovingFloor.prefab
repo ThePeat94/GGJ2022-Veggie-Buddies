@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1223815142789591356}
   - component: {fileID: 7338780722708884143}
+  - component: {fileID: 7428435925729891225}
   m_Layer: 0
   m_Name: MovingFloor
   m_TagString: Untagged
@@ -48,6 +49,19 @@ MonoBehaviour:
   m_startDelay: 0
   m_duration: 1
   m_width: 6
+--- !u!65 &7428435925729891225
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 891748245395174647}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.44, y: 4.196558, z: 2}
+  m_Center: {x: 1.29, y: 2.21, z: 0}
 --- !u!1001 &6820609943945906714
 PrefabInstance:
   m_ObjectHideFlags: 0

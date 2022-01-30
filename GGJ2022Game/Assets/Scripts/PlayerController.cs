@@ -56,6 +56,7 @@ namespace Nidavellir
         private Dictionary<ItemKind, int> m_itemCountsByItemKind = new();
 
         public PlayerType PlayerType => this.m_playerType;
+        public float EnvironmentVelocity = 0;
 
         public event EventHandler OnPlayerDied
         {
@@ -182,7 +183,11 @@ namespace Nidavellir
 
             if (this.m_isLocomoting)
             {
-                this.m_characterController.Move(Vector3.right * deltaTime * this.m_locomotionVelocity);
+                this.m_characterController.Move(Vector3.right * deltaTime * (this.m_locomotionVelocity + this.EnvironmentVelocity));
+            }
+            else
+            {
+                this.m_characterController.Move(Vector3.right * deltaTime * this.EnvironmentVelocity);
             }
 
             if (this.m_isGrounded && this.m_isLocomoting)
