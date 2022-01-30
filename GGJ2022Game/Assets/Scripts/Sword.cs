@@ -10,11 +10,14 @@ namespace Nidavellir
         [SerializeField] private AudioMixerGroup m_audioMixerGroup;
         [SerializeField] private ReachableTargetDetector m_reachableTargetDetector;
 
+        private Animator m_animator;
         private AudioSource m_swingAudioSource;
         private AudioSource m_hitAudioSource;
 
         private void Awake()
         {
+            this.m_animator = this.GetComponent<Animator>();
+
             this.m_hitAudioSource = this.gameObject.AddComponent<AudioSource>();
             this.m_hitAudioSource.clip = this.m_hitAudioClip;
             this.m_hitAudioSource.outputAudioMixerGroup = this.m_audioMixerGroup;
@@ -27,6 +30,7 @@ namespace Nidavellir
         public void Attack()
         {
             this.m_swingAudioSource.Play();
+            this.m_animator.SetTrigger("Swing");
 
             var attackTargetsInRange =  this.m_reachableTargetDetector.AttackTargetsInRange;
             if (attackTargetsInRange.Length > 0)
