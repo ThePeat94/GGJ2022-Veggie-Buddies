@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &2173759257844486146
+--- !u!1 &891748245395174647
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,52 +8,52 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1996021600839326430}
-  - component: {fileID: 2427223765060036215}
+  - component: {fileID: 1223815142789591356}
+  - component: {fileID: 7338780722708884143}
   m_Layer: 0
-  m_Name: WoodElevator
+  m_Name: MovingFloor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1996021600839326430
+--- !u!4 &1223815142789591356
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2173759257844486146}
+  m_GameObject: {fileID: 891748245395174647}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -9.31, y: 5.38, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1330601954177404142}
+  - {fileID: 2926084521696507502}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2427223765060036215
+--- !u!114 &7338780722708884143
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2173759257844486146}
+  m_GameObject: {fileID: 891748245395174647}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 629934aacd7ce2d4d87712bcd84dfeeb, type: 3}
+  m_Script: {fileID: 11500000, guid: cba280fa7d5207641b6cc2d321543467, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_startDelay: 1
+  m_startDelay: 0
   m_duration: 1
-  m_height: 8
---- !u!1001 &7226898239582564506
+  m_width: 6
+--- !u!1001 &6820609943945906714
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 1996021600839326430}
+    m_TransformParent: {fileID: 1223815142789591356}
     m_Modifications:
     - target: {fileID: 2139969172593165093, guid: 8ace4bc7fd7667d498220876f3319865, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -85,7 +85,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7800302880077400353, guid: 8ace4bc7fd7667d498220876f3319865, type: 3}
       propertyPath: m_Name
-      value: WoodFloor
+      value: MovingFloor
       objectReference: {fileID: 0}
     - target: {fileID: 7800302880077400353, guid: 8ace4bc7fd7667d498220876f3319865, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -117,15 +117,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8519727226086341748, guid: 8ace4bc7fd7667d498220876f3319865, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 8519727226086341748, guid: 8ace4bc7fd7667d498220876f3319865, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 8519727226086341748, guid: 8ace4bc7fd7667d498220876f3319865, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 8519727226086341748, guid: 8ace4bc7fd7667d498220876f3319865, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -141,8 +141,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8ace4bc7fd7667d498220876f3319865, type: 3}
---- !u!4 &1330601954177404142 stripped
+--- !u!4 &2926084521696507502 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8519727226086341748, guid: 8ace4bc7fd7667d498220876f3319865, type: 3}
-  m_PrefabInstance: {fileID: 7226898239582564506}
+  m_PrefabInstance: {fileID: 6820609943945906714}
   m_PrefabAsset: {fileID: 0}
