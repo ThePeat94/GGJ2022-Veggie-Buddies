@@ -14,6 +14,10 @@ namespace Nidavellir
         private void Awake()
         {
             this.m_attackTarget = GetComponent<AttackTarget>();
+        }
+
+        private void Start()
+        {
             this.m_attackTarget.onAttacked.AddListener(this.OnAttacked);
         }
 
