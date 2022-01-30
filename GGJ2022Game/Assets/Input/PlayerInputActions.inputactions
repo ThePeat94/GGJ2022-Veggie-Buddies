@@ -58,6 +58,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "BackToMenu",
+                    "type": "Button",
+                    "id": "199411f4-9ad2-4bd9-b9a2-b0fc5d4455ec",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -162,17 +171,6 @@
                 },
                 {
                     "name": "",
-                    "id": "0fb2cdf8-a266-4032-a0e5-0cc589262cc2",
-                    "path": "<Gamepad>/start",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Restart",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "c98318ef-8ff0-4050-a6a7-d2f19a22282e",
                     "path": "<Gamepad>/buttonSouth",
                     "interactions": "",
@@ -245,6 +243,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "PushPull",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6c5dda9e-77ff-4b5e-8448-c9159a69f4ec",
+                    "path": "<Keyboard>/enter",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "BackToMenu",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2fa96fde-acdd-4c0c-8d25-f5956cc11714",
+                    "path": "<Gamepad>/start",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "BackToMenu",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

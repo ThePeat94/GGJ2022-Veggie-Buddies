@@ -80,6 +80,15 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""BackToMenu"",
+                    ""type"": ""Button"",
+                    ""id"": ""199411f4-9ad2-4bd9-b9a2-b0fc5d4455ec"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -184,17 +193,6 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""0fb2cdf8-a266-4032-a0e5-0cc589262cc2"",
-                    ""path"": ""<Gamepad>/start"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Restart"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""c98318ef-8ff0-4050-a6a7-d2f19a22282e"",
                     ""path"": ""<Gamepad>/buttonSouth"",
                     ""interactions"": """",
@@ -269,6 +267,28 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""action"": ""PushPull"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6c5dda9e-77ff-4b5e-8448-c9159a69f4ec"",
+                    ""path"": ""<Keyboard>/enter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""BackToMenu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2fa96fde-acdd-4c0c-8d25-f5956cc11714"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""BackToMenu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -283,6 +303,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         m_Actions_QuitApplication = m_Actions.FindAction("QuitApplication", throwIfNotFound: true);
         m_Actions_Attack = m_Actions.FindAction("Attack", throwIfNotFound: true);
         m_Actions_PushPull = m_Actions.FindAction("PushPull", throwIfNotFound: true);
+        m_Actions_BackToMenu = m_Actions.FindAction("BackToMenu", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -348,6 +369,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_Actions_QuitApplication;
     private readonly InputAction m_Actions_Attack;
     private readonly InputAction m_Actions_PushPull;
+    private readonly InputAction m_Actions_BackToMenu;
     public struct ActionsActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -358,6 +380,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         public InputAction @QuitApplication => m_Wrapper.m_Actions_QuitApplication;
         public InputAction @Attack => m_Wrapper.m_Actions_Attack;
         public InputAction @PushPull => m_Wrapper.m_Actions_PushPull;
+        public InputAction @BackToMenu => m_Wrapper.m_Actions_BackToMenu;
         public InputActionMap Get() { return m_Wrapper.m_Actions; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -385,6 +408,9 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @PushPull.started -= m_Wrapper.m_ActionsActionsCallbackInterface.OnPushPull;
                 @PushPull.performed -= m_Wrapper.m_ActionsActionsCallbackInterface.OnPushPull;
                 @PushPull.canceled -= m_Wrapper.m_ActionsActionsCallbackInterface.OnPushPull;
+                @BackToMenu.started -= m_Wrapper.m_ActionsActionsCallbackInterface.OnBackToMenu;
+                @BackToMenu.performed -= m_Wrapper.m_ActionsActionsCallbackInterface.OnBackToMenu;
+                @BackToMenu.canceled -= m_Wrapper.m_ActionsActionsCallbackInterface.OnBackToMenu;
             }
             m_Wrapper.m_ActionsActionsCallbackInterface = instance;
             if (instance != null)
@@ -407,6 +433,9 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @PushPull.started += instance.OnPushPull;
                 @PushPull.performed += instance.OnPushPull;
                 @PushPull.canceled += instance.OnPushPull;
+                @BackToMenu.started += instance.OnBackToMenu;
+                @BackToMenu.performed += instance.OnBackToMenu;
+                @BackToMenu.canceled += instance.OnBackToMenu;
             }
         }
     }
@@ -419,5 +448,6 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         void OnQuitApplication(InputAction.CallbackContext context);
         void OnAttack(InputAction.CallbackContext context);
         void OnPushPull(InputAction.CallbackContext context);
+        void OnBackToMenu(InputAction.CallbackContext context);
     }
 }
