@@ -130,6 +130,8 @@ namespace Nidavellir
             var shouldGoBackToMainMenu = (this.m_anyPlayerDied || this.m_levelHasSucceeded) && this.m_inputProcessor.BackToMenuTriggered;
             if (shouldGoBackToMainMenu)
             {
+                this.m_latestCheckpointPassedPerPlayer[PlayerType.FORWARD_PLAYER] = null;
+                this.m_latestCheckpointPassedPerPlayer[PlayerType.BACKWARD_PLAYER] = null;
                 SceneManager.LoadScene(0);
                 return;
             }
@@ -143,7 +145,9 @@ namespace Nidavellir
             
             var shouldContinue = this.m_levelHasSucceeded && this.m_inputProcessor.RestartTriggered;
             if (shouldContinue)
-            {
+            {            
+                this.m_latestCheckpointPassedPerPlayer[PlayerType.FORWARD_PLAYER] = null;
+                this.m_latestCheckpointPassedPerPlayer[PlayerType.BACKWARD_PLAYER] = null;
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
                 return;
             }
@@ -161,8 +165,6 @@ namespace Nidavellir
             this.m_levelHasSucceeded = false;
             
             var players = FindObjectsOfType<PlayerController>();
-            this.m_latestCheckpointPassedPerPlayer[PlayerType.FORWARD_PLAYER] = null;
-            this.m_latestCheckpointPassedPerPlayer[PlayerType.BACKWARD_PLAYER] = null;
             this.m_forwardPlayer = players.First(pc => pc.PlayerType == PlayerType.FORWARD_PLAYER);
             this.m_backwardPlayer = players.First(pc => pc.PlayerType == PlayerType.BACKWARD_PLAYER);
             
