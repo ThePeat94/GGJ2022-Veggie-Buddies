@@ -18,7 +18,7 @@ TagManager:
   - PlayerCollider
   - Obstacle
   - Enemy
-  - 
+  - ActivelyPushedPulled
   - 
   - 
   - 
