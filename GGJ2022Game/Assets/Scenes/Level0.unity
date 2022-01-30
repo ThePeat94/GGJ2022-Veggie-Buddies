@@ -3954,14 +3954,6 @@ PrefabInstance:
       propertyPath: m_hurtAudioClip
       value: 
       objectReference: {fileID: 8300000, guid: 42b9b127c33e3974b8608f142f5f55ab, type: 3}
-    - target: {fileID: 6033241665578711198, guid: 13e973abecfaa624da90657307f5bb72, type: 3}
-      propertyPath: m_landAudioClip
-      value: 
-      objectReference: {fileID: 8300000, guid: 42b9b127c33e3974b8608f142f5f55ab, type: 3}
-    - target: {fileID: 6033241665578711198, guid: 13e973abecfaa624da90657307f5bb72, type: 3}
-      propertyPath: m_runningLoopAudioClip
-      value: 
-      objectReference: {fileID: 8300000, guid: f9974a47256367948858d36636225021, type: 3}
     - target: {fileID: 6579835936106830261, guid: 13e973abecfaa624da90657307f5bb72, type: 3}
       propertyPath: m_Name
       value: Players
