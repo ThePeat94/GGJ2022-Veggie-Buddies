@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace Nidavellir.UI
@@ -12,6 +13,12 @@ namespace Nidavellir.UI
 
         [SerializeField] private AudioClip m_shopEnterSound;
         [SerializeField] private AudioClip m_shopLeftSound;
+        [SerializeField] private AudioClip m_titleTheme;
+
+        private void Start()
+        {
+            MusicPlayer.Instance.PlayLoopingMusic(this.m_titleTheme);
+        }
 
         public void StartGame()
         {

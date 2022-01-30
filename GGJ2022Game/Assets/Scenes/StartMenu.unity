@@ -627,6 +627,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8756797789183169871, guid: b119e383d2e85bc4982380d7ef5170cf, type: 3}
+      propertyPath: m_titleTheme
+      value: 
+      objectReference: {fileID: 8300000, guid: b97514c5b595fad44b14c1cdf39f2945, type: 3}
+    - target: {fileID: 8756797789183169871, guid: b119e383d2e85bc4982380d7ef5170cf, type: 3}
       propertyPath: m_shopLeftSound
       value: 
       objectReference: {fileID: 8300000, guid: 0cf3ab2962e608041968314a013614db, type: 3}
