@@ -17,8 +17,9 @@ namespace Nidavellir.PlayerShop
         {
             if (toLoad == null)
                 return;
-            
-            this.m_eyes.material = toLoad.EyesMaterial;
+
+
+            this.m_eyes.materials[2] = toLoad.EyesMaterial;
 
             var materials = this.m_body.materials;
             materials[0] = toLoad.BodyMaterial;
