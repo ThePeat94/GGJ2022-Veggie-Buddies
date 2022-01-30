@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f8b71c70d284b1797d97122b6c97709, type: 3}
+  m_Name: Unnamed Gudrun
+  m_EditorClassIdentifier: 
+  m_playerType: 1
+  m_currencyCost: 15
+  m_id: 0
+  m_name: Unnamed Gudrun
+  m_image: {fileID: 21300000, guid: ddddfb43575cd4f43bf4c7498788917b, type: 3}
+  m_bodyMaterial: {fileID: 2100000, guid: a8ba4a79ea9562f4a8826393eb6cfd9d, type: 2}
+  m_pantsMaterial: {fileID: 2100000, guid: a01b8368b3573cf4aa438f6746da329c, type: 2}
+  m_eyesMaterial: {fileID: 2100000, guid: a01b8368b3573cf4aa438f6746da329c, type: 2}
