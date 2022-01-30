@@ -16,9 +16,12 @@ namespace Nidavellir
         [SerializeField] private AudioMixerGroup m_audioMixerGroup;
         [SerializeField] private PlayerType m_playerType;
         [SerializeField] private GameHUD m_hud;
+        [SerializeField] private GameObject m_body;
 
         [SerializeField] private Gun m_gun;
         [SerializeField] private Sword m_sword;
+
+        [SerializeField] private Animator m_explosion;
 
         [SerializeField] private AudioClip m_runningLoopAudioClip;
         [SerializeField] private AudioClip m_landAudioClip;
@@ -35,6 +38,8 @@ namespace Nidavellir
 
         private static readonly int s_isWalkingHash = Animator.StringToHash("IsWalking");
         private static readonly int s_jumpHash = Animator.StringToHash("Jump");
+        private static readonly int s_isDead = Animator.StringToHash("IsDead");
+        private static readonly int s_explode = Animator.StringToHash("Explode");
 
         private float m_locomotionVelocity = 0f;
         private bool m_isLocomoting;
@@ -60,16 +65,17 @@ namespace Nidavellir
 
         public void KillPlayer()
         {
+            if (this.m_isDead)
+                return;
+
             this.m_hurtAudioSource.Play();
             this.m_isDead = true;
-            this.m_playerDied?.Invoke(this, System.EventArgs.Empty);
+            this.StartCoroutine(this.Die());
         }
 
         public void PlayerHurt()
         {
-            this.m_hurtAudioSource.Play();
-            this.m_isDead = true;
-            this.m_playerDied?.Invoke(this, System.EventArgs.Empty);
+            this.KillPlayer();
         }
 
         public void PickUp(ItemKind itemKind)
@@ -88,6 +94,17 @@ namespace Nidavellir
             this.StartCoroutine(Respawn(respawnPosition));
         }
         
+        private IEnumerator Die()
+        {
+            this.m_animator.SetBool(s_isDead, true);
+            yield return new WaitForSeconds(0.5f);
+            this.m_explosion.SetTrigger(s_explode);
+            yield return new WaitForSeconds(0.2f);
+            this.m_body.SetActive(false);
+            yield return new WaitForSeconds(1.0f);
+            this.m_playerDied?.Invoke(this, System.EventArgs.Empty);
+        }
+
         private IEnumerator Respawn(Vector3 respawnPosition)
         {
             this.m_characterController.enabled = false;
@@ -95,6 +112,8 @@ namespace Nidavellir
             this.transform.position = respawnPosition;
             yield return new WaitForEndOfFrame();
             this.m_characterController.enabled = true;
+            this.m_body.SetActive(true);
+            this.m_animator.SetBool(s_isDead, false);
         }
 
         private void AddToInventory(ItemKind kind)
