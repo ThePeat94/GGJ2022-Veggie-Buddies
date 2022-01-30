@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Nidavellir.PlayerShop
@@ -8,6 +9,7 @@ namespace Nidavellir.PlayerShop
         [SerializeField] private List<ShopItem> m_availableItems;
 
         public IReadOnlyList<ShopItem> AvailableItems => this.m_availableItems;
+
 
         public bool TryBuyItem(ShopItem shopItem)
         {

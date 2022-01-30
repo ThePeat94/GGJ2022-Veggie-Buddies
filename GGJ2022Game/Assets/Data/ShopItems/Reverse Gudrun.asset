@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_playerType: 1
   m_currencyCost: 10
-  m_id: 2
-  m_gameObjectToLoad: {fileID: 0}
+  m_id: 3
   m_name: Reverse Gudrun
   m_image: {fileID: 21300000, guid: 68012bad95959cd4da42b6782066342a, type: 3}
+  m_bodyMaterial: {fileID: 2100000, guid: 9b570a19817a44948a5612e6d58ce23b, type: 2}
+  m_pantsMaterial: {fileID: 2100000, guid: 1ff20db8f2bb78f47997c10e78912f6f, type: 2}
+  m_eyesMaterial: {fileID: 2100000, guid: 1ff20db8f2bb78f47997c10e78912f6f, type: 2}
