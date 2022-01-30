@@ -178,8 +178,8 @@ MonoBehaviour:
   m_gun: {fileID: 0}
   m_sword: {fileID: 281232822969265963}
   m_explosion: {fileID: 5973471537104185391}
-  m_runningLoopAudioClip: {fileID: 8300000, guid: 66e7615a9a1f841cba3f6a4be79aaf74, type: 3}
-  m_landAudioClip: {fileID: 8300000, guid: 9d9b67b914dcb4ca9a51951d729ebbe2, type: 3}
+  m_runningLoopAudioClip: {fileID: 8300000, guid: 499de9e4b6f0e374eacdbee9adc28267, type: 3}
+  m_landAudioClip: {fileID: 8300000, guid: dbbc6dfe16416c74e82cea60828ec98a, type: 3}
   m_jumpRandomClipPlayer: {fileID: 5118352667351004088}
   m_dieRandomClipPlayer: {fileID: 2330676267128224849}
   EnvironmentVelocity: 0
@@ -944,15 +944,15 @@ PrefabInstance:
     - target: {fileID: 6806300311953779410, guid: 12e3e5376ac92d24180e28db6264e133, type: 3}
       propertyPath: m_audioClips.Array.data[0]
       value: 
-      objectReference: {fileID: 8300000, guid: 6cb3e7dabcdc9a447a8aff2b15e8b7d0, type: 3}
+      objectReference: {fileID: 8300000, guid: 7163c5bb3c8988241a113dc1fd1a98dc, type: 3}
     - target: {fileID: 6806300311953779410, guid: 12e3e5376ac92d24180e28db6264e133, type: 3}
       propertyPath: m_audioClips.Array.data[1]
       value: 
-      objectReference: {fileID: 8300000, guid: eb801cba2ba3b5640a7aee643979e765, type: 3}
+      objectReference: {fileID: 8300000, guid: 2834e82537abdcb47bd1dc7b95c22969, type: 3}
     - target: {fileID: 6806300311953779410, guid: 12e3e5376ac92d24180e28db6264e133, type: 3}
       propertyPath: m_audioClips.Array.data[2]
       value: 
-      objectReference: {fileID: 8300000, guid: d489fc408a0b4f447b38cb16dfe1f489, type: 3}
+      objectReference: {fileID: 8300000, guid: 02f5bff28cfe307479c89e507b3fc201, type: 3}
     - target: {fileID: 6806300311953779410, guid: 12e3e5376ac92d24180e28db6264e133, type: 3}
       propertyPath: m_audioClips.Array.data[3]
       value: 
