@@ -28,6 +28,8 @@ namespace Nidavellir
 
             this.m_attackAudioSource.Play();
 
+            Debug.Log($"Launching projectile {projectile}");
+
             // by adding the gun's (= the character's) velocity to the projectile, we can actively throw it further by moving while shooting
             projectile.Launch(this.transform.forward * 1000f);
         }
