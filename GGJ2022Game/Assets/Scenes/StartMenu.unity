@@ -359,6 +359,26 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 951137443583587017, guid: b119e383d2e85bc4982380d7ef5170cf, type: 3}
+      propertyPath: m_text
+      value: 'Hendrik - Programming
+
+        Melissa - Digital Art
+
+        manio
+        & ben - Music & Sound Producer
+
+        Andre - Programming
+
+        Clemens
+        - Programming
+
+
+        Thanks for playing our game :) If you want to support
+        us, you can follow us on social media right below. There we are posting about
+        game jams, development progress and similar contents to help us or you with
+        your Game Dev Journey :) '
+      objectReference: {fileID: 0}
+    - target: {fileID: 951137443583587017, guid: b119e383d2e85bc4982380d7ef5170cf, type: 3}
       propertyPath: m_fontAsset
       value: 
       objectReference: {fileID: 11400000, guid: 91e4edb4e20ff254e8a62d9fa5a1b1f1, type: 2}
