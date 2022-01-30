@@ -302,6 +302,9 @@ MonoBehaviour:
   m_inputProcessor: {fileID: 512869924}
   m_defaultKarlSkin: {fileID: 0}
   m_defaultGudrunSkin: {fileID: 0}
+  m_karlReachedGoal: {fileID: 0}
+  m_gudrunReachedGoal: {fileID: 0}
+  m_levelSucceededSfx: {fileID: 0}
 --- !u!4 &512869926
 Transform:
   m_ObjectHideFlags: 0
@@ -334,7 +337,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4493416286542116476, guid: ffd59bff219b5ee419db63aa77549b52, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -52.02
+      value: -52.23
       objectReference: {fileID: 0}
     - target: {fileID: 4493416286542116476, guid: ffd59bff219b5ee419db63aa77549b52, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

@@ -539,14 +539,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2597762326616854660, guid: 2a3099f3e279d244881f72ca5e6cc8e4, type: 3}
-      propertyPath: m_defaultKarlSkin
-      value: 
-      objectReference: {fileID: 11400000, guid: f1693f48838360647a81ce20bdb5929b, type: 2}
-    - target: {fileID: 2597762326616854660, guid: 2a3099f3e279d244881f72ca5e6cc8e4, type: 3}
-      propertyPath: m_defaultGudrunSkin
-      value: 
-      objectReference: {fileID: 11400000, guid: c9fefea2f5f4cdb4d8809c0439488422, type: 2}
     - target: {fileID: 2597762326616854661, guid: 2a3099f3e279d244881f72ca5e6cc8e4, type: 3}
       propertyPath: m_RootOrder
       value: 3
