@@ -13,8 +13,9 @@ namespace Nidavellir
         [SerializeField]
         private float m_width = 8;
 
-
         private float m_startX;
+        private float m_currentSpeed = 0;
+        private List<PlayerController> m_players = new List<PlayerController>();
 
         private void Awake()
         {
@@ -24,6 +25,22 @@ namespace Nidavellir
         private void OnEnable()
         {
             this.StartCoroutine(this.Move());
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (!other.TryGetComponent<PlayerController>(out var playerController))
+                return;
+
+            this.m_players.Add(playerController);
+        }
+
+        private void OnTriggerExit(Collider other)
+        {
+            if (!other.TryGetComponent<PlayerController>(out var playerController))
+                return;
+
+            this.m_players.Remove(playerController);
         }
 
         private IEnumerator Move()
@@ -42,10 +59,17 @@ namespace Nidavellir
         {
             while (this.transform.position.x < this.m_startX + this.m_width)
             {
-                yield return new WaitForFixedUpdate();
                 var x = Mathf.Clamp(this.transform.position.x + (4 * Time.fixedDeltaTime * this.m_duration), this.m_startX, this.m_startX + this.m_width);
                 this.transform.position = new Vector3(x, this.transform.position.y, this.transform.position.z);
+                foreach (var player in this.m_players)
+                    player.EnvironmentVelocity = 4 * this.m_duration;
+
+                yield return new WaitForFixedUpdate();
             }
+
+            foreach (var player in this.m_players)
+                player.EnvironmentVelocity = 0;
+
             yield break;
         }
 
@@ -53,10 +77,17 @@ namespace Nidavellir
         {
             while (this.transform.position.x > this.m_startX)
             {
-                yield return new WaitForFixedUpdate();
                 var x = Mathf.Clamp(this.transform.position.x - (4 * Time.fixedDeltaTime * this.m_duration), this.m_startX, this.m_startX + this.m_width);
                 this.transform.position = new Vector3(x, this.transform.position.y, this.transform.position.z);
+                foreach (var player in this.m_players)
+                    player.EnvironmentVelocity = -4 * this.m_duration;
+
+                yield return new WaitForFixedUpdate();
             }
+
+            foreach (var player in this.m_players)
+                player.EnvironmentVelocity = 0;
+
             yield break;
         }
     }
