@@ -366,6 +366,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_shopCardPrefab: {fileID: 1380706034968419093, guid: f779fdde830a73b4ab7f5e52631a15dd, type: 3}
   m_cardsParent: {fileID: 5487576489942858893}
+  m_purchaseClip: {fileID: 8300000, guid: ef9ff008145ce624090d7f25473c69ad, type: 3}
   m_shop: {fileID: 0}
 --- !u!1 &3173116876711877851
 GameObject:
@@ -2132,6 +2133,8 @@ MonoBehaviour:
   m_credits: {fileID: 622277979544788241}
   m_gameTheme: {fileID: 8300000, guid: d1e7cfaca0fb1544f854ec81d7365d3a, type: 3}
   m_shopMenu: {fileID: 2273057990965131981}
+  m_shopEnterSound: {fileID: 0}
+  m_shopLeftSound: {fileID: 0}
 --- !u!1 &8756797789802823358
 GameObject:
   m_ObjectHideFlags: 0
