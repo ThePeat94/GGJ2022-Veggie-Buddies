@@ -14,7 +14,6 @@ namespace Nidavellir
 
         public void SetPosition(Vector3 position)
         {
-            Debug.Log("PushPullable.SetPosition()");
             this.m_rigidbody.position = position;
         }
     }
