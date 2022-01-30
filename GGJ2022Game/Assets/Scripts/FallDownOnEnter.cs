@@ -35,7 +35,7 @@ namespace Nidavellir
             yield return new WaitForSeconds(this.m_timeTillFallingDown / 3);
             animator.enabled = false;
             this.m_fallingObject.AddComponent<Rigidbody>();
-            var obstacle = this.m_fallingObject.AddComponent<HurtingObstacle>();
+            var obstacle = this.m_fallingObject.AddComponent<DeadZone>();
             yield return new WaitForSeconds(3f);
             obstacle.enabled = false;
         }

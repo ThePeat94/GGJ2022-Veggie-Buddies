@@ -15,7 +15,6 @@ namespace Nidavellir
         [SerializeField] private PlayerData m_playerData;
         [SerializeField] private AudioMixerGroup m_audioMixerGroup;
         [SerializeField] private PlayerType m_playerType;
-        [SerializeField] private CinemachineBrain m_cinemachineBrain;
         [SerializeField] private GameHUD m_hud;
 
         [SerializeField] private Gun m_gun;
