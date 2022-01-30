@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Nidavellir.EventArgs;
+using Nidavellir.PlayerShop;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -29,6 +30,8 @@ namespace Nidavellir
 
         private EventHandler m_gameOver;
         private EventHandler m_levelSucceeded;
+        [SerializeField] private ShopItem m_defaultKarlSkin;
+        [SerializeField] private ShopItem m_defaultGudrunSkin;
 
         public static GameStateManager Instance => s_instance;
 
@@ -56,6 +59,12 @@ namespace Nidavellir
                 Destroy(this.gameObject);
                 return;
             }
+            
+            // Default Skins
+            PlayerInventory.Instance.AddShopItem(this.m_defaultKarlSkin);
+            PlayerInventory.Instance.AddShopItem(this.m_defaultGudrunSkin);
+            PlayerInventory.Instance.ActiveKarlSkin = this.m_defaultKarlSkin;
+            PlayerInventory.Instance.ActiveGudrunSkin = this.m_defaultGudrunSkin;
         }
 
         private void Start()
