@@ -8,7 +8,8 @@ namespace Nidavellir.UI
         [SerializeField] private GameObject m_startMenu;
         [SerializeField] private GameObject m_credits;
         [SerializeField] private AudioClip m_gameTheme;
-        
+        [SerializeField] private GameObject m_shopMenu;
+
         public void StartGame()
         {
             MusicPlayer.Instance.PlayLoopingMusic(this.m_gameTheme);
@@ -30,6 +31,18 @@ namespace Nidavellir.UI
         {
             this.m_startMenu.SetActive(true);
             this.m_credits.SetActive(false);
+        }
+
+        public void ShowShop()
+        {
+            this.m_startMenu.SetActive(false);
+            this.m_shopMenu.SetActive(true);
+        }
+        
+        public void BackFromShopToStart()
+        {
+            this.m_startMenu.SetActive(true);
+            this.m_shopMenu.SetActive(false);
         }
 
         public void OpenLink(string url)

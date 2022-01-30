@@ -1,19 +1,28 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Nidavellir
 {
+
+    [RequireComponent(typeof(AttackTarget))]
     public class SpikyAgent : MonoBehaviour
     {
         [SerializeField] private float m_frequency;
         [SerializeField] private float m_amplitude;
 
         private CharacterController m_characterController;
+        private AttackTarget m_attackTarget;
 
         private void Awake()
         {
             this.m_characterController = GetComponent<CharacterController>();
+            this.m_attackTarget = GetComponent<AttackTarget>();
+            this.m_attackTarget.onAttacked.AddListener(this.OnAttacked);
+        }
+
+        public void OnAttacked()
+        {
+            // TODO: play audio clip
+            Destroy(this.gameObject);
         }
 
         void Update()

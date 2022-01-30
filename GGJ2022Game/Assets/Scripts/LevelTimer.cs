@@ -32,6 +32,12 @@ namespace Nidavellir
             this.m_stopwatch.Start();
         }
 
+        public void RestartStopWatch()
+        {
+            this.m_stopwatch.Reset();
+            this.m_stopwatch.Start();
+        }
+
         public void StopStopWatch()
         {
             this.m_stopwatch.Stop();

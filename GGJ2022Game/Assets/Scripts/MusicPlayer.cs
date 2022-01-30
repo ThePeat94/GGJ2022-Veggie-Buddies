@@ -21,7 +21,7 @@ namespace Nidavellir
             }
             else
             {
-                Destroy(this);
+                Destroy(this.gameObject);
                 return;
             }
 

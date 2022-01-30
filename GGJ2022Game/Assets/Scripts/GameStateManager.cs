@@ -53,7 +53,7 @@ namespace Nidavellir
             }
             else
             {
-                Destroy(this);
+                Destroy(this.gameObject);
                 return;
             }
         }
@@ -107,7 +107,14 @@ namespace Nidavellir
                 Application.Quit();
                 return;
             }
-            
+
+            var shouldGoBackToMainMenu = (this.m_anyPlayerDied || this.m_levelHasSucceeded) && this.m_inputProcessor.BackToMenuTriggered;
+            if (shouldGoBackToMainMenu)
+            {
+                SceneManager.LoadScene(0);
+                return;
+            }
+
             var shouldRestart = this.m_anyPlayerDied && this.m_inputProcessor.RestartTriggered;
             if (shouldRestart)
             {
@@ -144,7 +151,7 @@ namespace Nidavellir
             
             this.RespawnPlayer(this.m_forwardPlayer);
             this.RespawnPlayer(this.m_backwardPlayer);
-            LevelTimer.Instance.StartStopWatch();
+            LevelTimer.Instance.RestartStopWatch();
         }
 
         private void RespawnPlayer(PlayerController toRespawn)

@@ -13,6 +13,7 @@ namespace Nidavellir
             if (controller != null)
             {
                 controller.PickUp(this.Kind);
+                Destroy(this.gameObject);
             }
         }
     }
