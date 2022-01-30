@@ -49,9 +49,9 @@ MonoBehaviour:
   m_inputProcessor: {fileID: 2597762326616854667}
   m_defaultKarlSkin: {fileID: 11400000, guid: f1693f48838360647a81ce20bdb5929b, type: 2}
   m_defaultGudrunSkin: {fileID: 11400000, guid: c9fefea2f5f4cdb4d8809c0439488422, type: 2}
-  m_karlReachedGoal: {fileID: 8300000, guid: 42b9b127c33e3974b8608f142f5f55ab, type: 3}
-  m_gudrunReachedGoal: {fileID: 8300000, guid: 6cb3e7dabcdc9a447a8aff2b15e8b7d0, type: 3}
-  m_levelSucceededSfx: {fileID: 8300000, guid: 6eb7fec03219e2d42abb8356ca1f245c, type: 3}
+  m_karlReachedGoal: {fileID: 8300000, guid: b2cae99fcbe1b2948aa5633985deebf4, type: 3}
+  m_gudrunReachedGoal: {fileID: 8300000, guid: 657491a9a8ed98544b5046795fbfd894, type: 3}
+  m_levelSucceededSfx: {fileID: 8300000, guid: 83f6486f3d0d1c34a823c970c14d31dd, type: 3}
 --- !u!114 &2597762326616854667
 MonoBehaviour:
   m_ObjectHideFlags: 0

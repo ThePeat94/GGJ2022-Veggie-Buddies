@@ -161,6 +161,8 @@ namespace Nidavellir
             this.m_levelHasSucceeded = false;
             
             var players = FindObjectsOfType<PlayerController>();
+            this.m_latestCheckpointPassedPerPlayer[PlayerType.FORWARD_PLAYER] = null;
+            this.m_latestCheckpointPassedPerPlayer[PlayerType.BACKWARD_PLAYER] = null;
             this.m_forwardPlayer = players.First(pc => pc.PlayerType == PlayerType.FORWARD_PLAYER);
             this.m_backwardPlayer = players.First(pc => pc.PlayerType == PlayerType.BACKWARD_PLAYER);
             
