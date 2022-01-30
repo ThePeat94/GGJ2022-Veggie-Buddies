@@ -25,11 +25,10 @@ namespace Nidavellir
         [SerializeField] private AudioClip m_landAudioClip;
         [SerializeField] private AudioClip m_hurtAudioClip;
 
-        [SerializeField] private PushAndPullAbility m_pushAndPullAbility;
-
         private CharacterController m_characterController;
         private InputProcessor m_inputProcessor;
         private Animator m_animator;
+        private PushAndPullAbility m_pushAndPullAbility;
         private RandomClipPlayer m_jumpRandomClipPlayer;
         private AudioSource m_runningLoopAudioSource;
         private AudioSource m_landAudioSource;
@@ -111,6 +110,7 @@ namespace Nidavellir
             this.m_characterController = this.GetComponent<CharacterController>();
             this.m_animator = this.GetComponent<Animator>();
             this.m_jumpRandomClipPlayer = this.GetComponent<RandomClipPlayer>();
+            this.m_pushAndPullAbility = this.GetComponent<PushAndPullAbility>();
 
             this.m_runningLoopAudioSource = this.gameObject.AddComponent<AudioSource>();
             this.m_runningLoopAudioSource.clip = this.m_runningLoopAudioClip;
@@ -190,6 +190,7 @@ namespace Nidavellir
             {
                 if (this.m_inputProcessor.PushPullActivated)
                 {
+                    Debug.Log("this.m_pushAndPullAbility.Activate();");
                     this.m_pushAndPullAbility.Activate();
                 }
 
