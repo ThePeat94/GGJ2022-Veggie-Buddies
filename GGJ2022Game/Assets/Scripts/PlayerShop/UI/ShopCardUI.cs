@@ -17,10 +17,13 @@ namespace Nidavellir.PlayerShop.UI
         private ShopItem m_data;
         private Shop m_shop;
 
-        public void CreateCard(ShopItem shopItem, Shop shop)
+        private AudioClip m_purchaseClip;
+
+        public void CreateCard(ShopItem shopItem, Shop shop, AudioClip purchaseClip)
         {
             this.m_data = shopItem;
             this.m_shop = shop;
+            this.m_purchaseClip = purchaseClip;
          
             this.m_costText.text = shopItem.Cost.ToString();
             this.m_nameText.text = shopItem.Name;
@@ -63,6 +66,7 @@ namespace Nidavellir.PlayerShop.UI
         {
             if (this.m_shop.TryBuyItem(this.m_data))
             {
+                AudioSource.PlayClipAtPoint(this.m_purchaseClip, Camera.main.transform.position);
                 this.m_activateButton.gameObject.SetActive(true);
                 this.m_buyButton.gameObject.SetActive(false);
             }

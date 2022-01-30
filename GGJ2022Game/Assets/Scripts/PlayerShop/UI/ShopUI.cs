@@ -7,6 +7,7 @@ namespace Nidavellir.PlayerShop.UI
     {
         [SerializeField] private GameObject m_shopCardPrefab;
         [SerializeField] private GameObject m_cardsParent;
+        [SerializeField] private AudioClip m_purchaseClip;
 
         [SerializeField] private Shop m_shop;
         
@@ -21,7 +22,7 @@ namespace Nidavellir.PlayerShop.UI
             {
                 var createdCard = Instantiate(this.m_shopCardPrefab, this.m_cardsParent.transform)
                     .GetComponent<ShopCardUI>();
-                createdCard.CreateCard(shopItem, this.m_shop);
+                createdCard.CreateCard(shopItem, this.m_shop, this.m_purchaseClip);
             }
         }
     }
