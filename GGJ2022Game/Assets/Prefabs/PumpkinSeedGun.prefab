@@ -44,6 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e531a8aca1a42fa479e8934aff4ff586, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_attackAudioClip: {fileID: 8300000, guid: c4a02182a161a4706b34bc5966a92308, type: 3}
-  m_audioMixerGroup: {fileID: -6307698973516290836, guid: 388f718078838d441a5f6db835181182, type: 2}
   m_projectileAsset: {fileID: 1630253885881926805, guid: 1744fbc503e215244a745b583a773034, type: 3}
+  m_attackAudioClip: {fileID: 8300000, guid: c4a02182a161a4706b34bc5966a92308, type: 3}
+  m_audioMixerGroup: {fileID: 8433430384898204005, guid: 388f718078838d441a5f6db835181182, type: 2}
