@@ -10,7 +10,9 @@ namespace Nidavellir
     {
         public void PlayOneShot(AudioClip clipToPlay)
         {
-           this.StartCoroutine(this.PlayClipAndDestroySource(clipToPlay));
+            if (clipToPlay == null)
+                return;
+            this.StartCoroutine(this.PlayClipAndDestroySource(clipToPlay));
         }
 
         private IEnumerator PlayClipAndDestroySource(AudioClip clip)
