@@ -16,7 +16,7 @@ MonoBehaviour:
   m_currencyCost: 0
   m_id: 1
   m_name: Default Karl
-  m_image: {fileID: 21300000, guid: 76ec7855f799a274199865d14c28b260, type: 3}
+  m_image: {fileID: 21300000, guid: 11df85c4714e5c54e8110e0b73701a6b, type: 3}
   m_bodyMaterial: {fileID: 2100000, guid: 0ca328cf3ed83b74298fa00ef5719765, type: 2}
   m_pantsMaterial: {fileID: 2100000, guid: da51bcd33b699954b93d8abcafbb9d84, type: 2}
   m_eyesMaterial: {fileID: 2100000, guid: da51bcd33b699954b93d8abcafbb9d84, type: 2}

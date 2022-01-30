@@ -16,7 +16,7 @@ MonoBehaviour:
   m_currencyCost: 0
   m_id: 1
   m_name: Default Gudrun
-  m_image: {fileID: 21300000, guid: 832d76df8e940754bb385c925f2a46cd, type: 3}
+  m_image: {fileID: 21300000, guid: 863bb76cd2cea0144b07b1cbbaa9bc7b, type: 3}
   m_bodyMaterial: {fileID: 2100000, guid: e7504d1049293714589808fb45c21185, type: 2}
   m_pantsMaterial: {fileID: 2100000, guid: 576175198b32def4e85e57d4edaf1469, type: 2}
   m_eyesMaterial: {fileID: 2100000, guid: 576175198b32def4e85e57d4edaf1469, type: 2}
