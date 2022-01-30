@@ -163,8 +163,7 @@ MonoBehaviour:
   m_explosion: {fileID: 1255146680451166304}
   m_runningLoopAudioClip: {fileID: 8300000, guid: f9974a47256367948858d36636225021, type: 3}
   m_landAudioClip: {fileID: 8300000, guid: 42b9b127c33e3974b8608f142f5f55ab, type: 3}
-  m_hurtAudioClip: {fileID: 8300000, guid: 42b9b127c33e3974b8608f142f5f55ab, type: 3}
-  m_pushAndPullAbility: {fileID: 0}
+  m_hurtAudioClip: {fileID: 8300000, guid: eff681c25c5f1a24abf43e05b16d2976, type: 3}
 --- !u!114 &2663488587464844826
 MonoBehaviour:
   m_ObjectHideFlags: 0
