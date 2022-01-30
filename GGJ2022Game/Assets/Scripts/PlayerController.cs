@@ -38,7 +38,7 @@ namespace Nidavellir
 
         private static readonly int s_isWalkingHash = Animator.StringToHash("IsWalking");
         private static readonly int s_jumpHash = Animator.StringToHash("Jump");
-        private static readonly int s_isDead = Animator.StringToHash("IsDead");
+        private static readonly int s_die = Animator.StringToHash("Die");
         private static readonly int s_explode = Animator.StringToHash("Explode");
 
         private float m_locomotionVelocity = 0f;
@@ -97,7 +97,7 @@ namespace Nidavellir
         
         private IEnumerator Die()
         {
-            this.m_animator.SetBool(s_isDead, true);
+            this.m_animator.SetTrigger(s_die);
             this.m_runningLoopAudioSource.Stop();
             this.m_landAudioSource.Stop();
             
@@ -121,7 +121,6 @@ namespace Nidavellir
             yield return new WaitForEndOfFrame();
             this.m_characterController.enabled = true;
             this.m_body.SetActive(true);
-            this.m_animator.SetBool(s_isDead, false);
         }
 
         private void AddToInventory(ItemKind kind)
