@@ -2130,7 +2130,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_startMenu: {fileID: 8756797789802823358}
   m_credits: {fileID: 622277979544788241}
-  m_gameTheme: {fileID: 8300000, guid: 4138636604723c24e9ea92ca3c63ed05, type: 3}
+  m_gameTheme: {fileID: 8300000, guid: d1e7cfaca0fb1544f854ec81d7365d3a, type: 3}
   m_shopMenu: {fileID: 2273057990965131981}
 --- !u!1 &8756797789802823358
 GameObject:

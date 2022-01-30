@@ -10,6 +10,9 @@ namespace Nidavellir.UI
         [SerializeField] private AudioClip m_gameTheme;
         [SerializeField] private GameObject m_shopMenu;
 
+        [SerializeField] private AudioClip m_shopEnterSound;
+        [SerializeField] private AudioClip m_shopLeftSound;
+
         public void StartGame()
         {
             MusicPlayer.Instance.PlayLoopingMusic(this.m_gameTheme);
@@ -35,12 +38,14 @@ namespace Nidavellir.UI
 
         public void ShowShop()
         {
+            AudioSource.PlayClipAtPoint(this.m_shopEnterSound, Camera.main.transform.position);
             this.m_startMenu.SetActive(false);
             this.m_shopMenu.SetActive(true);
         }
         
         public void BackFromShopToStart()
         {
+            AudioSource.PlayClipAtPoint(this.m_shopLeftSound, Camera.main.transform.position);
             this.m_startMenu.SetActive(true);
             this.m_shopMenu.SetActive(false);
         }
