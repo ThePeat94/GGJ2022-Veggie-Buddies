@@ -388,17 +388,9 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8300000, guid: 42b9b127c33e3974b8608f142f5f55ab, type: 3}
     - target: {fileID: 2828742552548346727, guid: 4245c71f455b6dc4db6e07fba6dc04ff, type: 3}
-      propertyPath: m_landAudioClip
-      value: 
-      objectReference: {fileID: 8300000, guid: 42b9b127c33e3974b8608f142f5f55ab, type: 3}
-    - target: {fileID: 2828742552548346727, guid: 4245c71f455b6dc4db6e07fba6dc04ff, type: 3}
       propertyPath: m_cinemachineBrain
       value: 
       objectReference: {fileID: 0}
-    - target: {fileID: 2828742552548346727, guid: 4245c71f455b6dc4db6e07fba6dc04ff, type: 3}
-      propertyPath: m_runningLoopAudioClip
-      value: 
-      objectReference: {fileID: 8300000, guid: f9974a47256367948858d36636225021, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4245c71f455b6dc4db6e07fba6dc04ff, type: 3}
 --- !u!4 &6033241665578711197 stripped
