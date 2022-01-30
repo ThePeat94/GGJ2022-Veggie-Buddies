@@ -9,10 +9,10 @@ namespace Nidavellir
         private void OnTriggerEnter(Collider other)
         {
             Debug.Log($"PickupSpawner triggered by: {other.gameObject}");
-            var controller = other.gameObject.GetComponentInParent<PlayerController>();
-            if (controller != null)
+            var collider = other.gameObject.GetComponent<PlayerCollider>();
+            if (collider != null)
             {
-                controller.PickUp(this.Kind);
+                collider.PlayerController.PickUp(this.Kind);
                 Destroy(this.gameObject);
             }
         }
