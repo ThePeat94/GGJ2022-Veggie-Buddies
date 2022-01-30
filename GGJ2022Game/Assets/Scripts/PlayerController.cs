@@ -51,6 +51,7 @@ namespace Nidavellir
         private bool m_playJumpAnimation;
 
         private bool m_isDead;
+        private bool m_preventMovement;
 
         private EventHandler m_playerDied;
         private Dictionary<ItemKind, int> m_itemCountsByItemKind = new();
@@ -83,7 +84,7 @@ namespace Nidavellir
             switch (itemKind)
             {
                 case ItemKind.PumpkinSeeds:
-                    AddToInventory(itemKind);
+                    this.AddToInventory(itemKind);
                     this.m_hud.SetPumpkinSeedCount(this.m_itemCountsByItemKind[ItemKind.PumpkinSeeds]);
                     break;
             }
@@ -126,7 +127,7 @@ namespace Nidavellir
         private void AddToInventory(ItemKind kind)
         {
             var currentValue = this.m_itemCountsByItemKind.ContainsKey(kind) ? this.m_itemCountsByItemKind[kind] : 0;
-            m_itemCountsByItemKind[kind] = currentValue + 1;
+            this.m_itemCountsByItemKind[kind] = currentValue + 1;
         }
 
         private void Awake()
@@ -153,7 +154,7 @@ namespace Nidavellir
 
         private void Update()
         {
-            if(this.m_isDead)
+            if(this.m_isDead || this.m_preventMovement)
                 return;
             
             this.ApplyGravity(Time.deltaTime); // we have to apply gravity first to make sure the CharacterController.isGrounded property works
@@ -164,7 +165,7 @@ namespace Nidavellir
         }
         private void LateUpdate()
         {
-            if(this.m_isDead)
+            if(this.m_isDead || this.m_preventMovement)
                 return;
             this.UpdateAnimator();
         }
@@ -279,5 +280,9 @@ namespace Nidavellir
             }
         }
 
+        public void PreventMovement()
+        {
+            this.m_preventMovement = true;
+        }
     }
 }
