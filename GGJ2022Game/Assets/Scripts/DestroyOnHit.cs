@@ -33,6 +33,8 @@ namespace Nidavellir
             yield return new WaitForSeconds(0.5f);
             animator.SetFloat("Speed", 1f);
             yield return new WaitForSeconds(0.5f);
+            this.gameObject.AddComponent<Rigidbody>();
+            yield return new WaitForSeconds(4f);
             GameObject.Destroy(this.gameObject);
 
         }

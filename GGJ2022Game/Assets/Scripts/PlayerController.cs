@@ -97,6 +97,8 @@ namespace Nidavellir
         private IEnumerator Die()
         {
             this.m_animator.SetBool(s_isDead, true);
+            this.m_runningLoopAudioSource.Stop();
+            this.m_landAudioSource.Stop();
             yield return new WaitForSeconds(0.5f);
             this.m_explosion.SetTrigger(s_explode);
             yield return new WaitForSeconds(0.2f);
