@@ -14,7 +14,7 @@ namespace Nidavellir
                 return;
 
             Debug.Log($"DestoryOnHit triggered by: {other.gameObject}");
-            var controller = other.gameObject.GetComponentInParent<PlayerController>();
+            var controller = other.gameObject.GetComponent<PlayerController>();
             if (controller != null)
             {
                 this.m_destroying = this.StartCoroutine(this.DestroyRoutine());
@@ -33,6 +33,8 @@ namespace Nidavellir
             yield return new WaitForSeconds(0.5f);
             animator.SetFloat("Speed", 1f);
             yield return new WaitForSeconds(0.5f);
+            this.gameObject.AddComponent<Rigidbody>();
+            yield return new WaitForSeconds(4f);
             GameObject.Destroy(this.gameObject);
 
         }

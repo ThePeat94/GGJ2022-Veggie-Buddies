@@ -20,6 +20,7 @@ namespace Nidavellir
             if (other.gameObject.TryGetComponent<PlayerController>(out var playerController) && playerController.PlayerType == this.m_goalForPlayerType)
             {
                 Debug.Log($"{playerController.PlayerType} reached goal");
+                playerController.PreventMovement();
                 this.m_playerReachedGoal?.Invoke(this, System.EventArgs.Empty);
             }
         }

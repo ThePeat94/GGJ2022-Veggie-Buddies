@@ -20,7 +20,6 @@ namespace Nidavellir
         private void OnTriggerEnter(Collider other)
         {
             var target = other.GetComponent<AttackTarget>();
-            Debug.Log($"OnTriggerEnter {target}");
             if (target != null)
             {
                 m_targetsInMeleeRange.Add(target);
@@ -36,7 +35,6 @@ namespace Nidavellir
         private void OnTriggerExit(Collider other)
         {
             var target = other.GetComponent<AttackTarget>();
-            Debug.Log($"OnTriggerExit {target}");
             if (target != null)
             {
                 m_targetsInMeleeRange.Remove(target);

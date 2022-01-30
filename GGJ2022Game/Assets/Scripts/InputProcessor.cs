@@ -15,11 +15,10 @@ namespace Nidavellir
 
         public bool JumpTriggered => this.m_playerInput.actions["Jump"].triggered && this.m_playerInput.actions["Jump"].ReadValue<float>() > 0;
         public bool AttackTriggered => this.m_playerInput.actions["Attack"].triggered && this.m_playerInput.actions["Attack"].ReadValue<float>() > 0;
-        public bool PushPullActivated => this.m_playerInput.actions["PushPull"].triggered;
-        public bool PushPullDeactivated => this.m_playerInput.actions["PushPull"].WasReleasedThisFrame();
 
         public bool RestartTriggered => this.m_playerInput.actions["Restart"].triggered;
         public bool QuitTriggered => this.m_playerInput.actions["QuitApplication"].triggered;
+        public bool BackToMenuTriggered => this.m_playerInput.actions["BackToMenu"].triggered;
 
         private void Awake()
         {
