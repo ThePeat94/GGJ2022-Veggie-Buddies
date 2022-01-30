@@ -486,6 +486,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2591612545417708522, guid: ea6620b3d0569484dabbc1547ad07be3, type: 3}
+      propertyPath: m_Volume
+      value: 0.878
+      objectReference: {fileID: 0}
     - target: {fileID: 2591612545417708523, guid: ea6620b3d0569484dabbc1547ad07be3, type: 3}
       propertyPath: m_Name
       value: MainTheme
@@ -1069,9 +1073,9 @@ MonoBehaviour:
   m_inputProcessor: {fileID: 512869924}
   m_defaultKarlSkin: {fileID: 0}
   m_defaultGudrunSkin: {fileID: 0}
-  m_karlReachedGoal: {fileID: 0}
-  m_gudrunReachedGoal: {fileID: 0}
-  m_levelSucceededSfx: {fileID: 0}
+  m_karlReachedGoal: {fileID: 8300000, guid: b2cae99fcbe1b2948aa5633985deebf4, type: 3}
+  m_gudrunReachedGoal: {fileID: 8300000, guid: 657491a9a8ed98544b5046795fbfd894, type: 3}
+  m_levelSucceededSfx: {fileID: 8300000, guid: 83f6486f3d0d1c34a823c970c14d31dd, type: 3}
 --- !u!4 &512869926
 Transform:
   m_ObjectHideFlags: 0

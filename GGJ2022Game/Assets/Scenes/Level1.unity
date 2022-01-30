@@ -302,9 +302,9 @@ MonoBehaviour:
   m_inputProcessor: {fileID: 512869924}
   m_defaultKarlSkin: {fileID: 0}
   m_defaultGudrunSkin: {fileID: 0}
-  m_karlReachedGoal: {fileID: 0}
-  m_gudrunReachedGoal: {fileID: 0}
-  m_levelSucceededSfx: {fileID: 0}
+  m_karlReachedGoal: {fileID: 8300000, guid: b2cae99fcbe1b2948aa5633985deebf4, type: 3}
+  m_gudrunReachedGoal: {fileID: 8300000, guid: 657491a9a8ed98544b5046795fbfd894, type: 3}
+  m_levelSucceededSfx: {fileID: 8300000, guid: 83f6486f3d0d1c34a823c970c14d31dd, type: 3}
 --- !u!4 &512869926
 Transform:
   m_ObjectHideFlags: 0
