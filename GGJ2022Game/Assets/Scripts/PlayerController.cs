@@ -137,6 +137,7 @@ namespace Nidavellir
             this.m_runningLoopAudioSource = this.gameObject.AddComponent<AudioSource>();
             this.m_runningLoopAudioSource.clip = this.m_runningLoopAudioClip;
             this.m_runningLoopAudioSource.loop = true;
+            this.m_runningLoopAudioSource.volume = 0.66f;
             this.m_runningLoopAudioSource.outputAudioMixerGroup = this.m_audioMixerGroup;
 
             this.m_landAudioSource = this.gameObject.AddComponent<AudioSource>();

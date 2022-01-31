@@ -106,7 +106,7 @@ namespace Nidavellir
             this.m_backwardPlayerReachedGoal = true;
             
             if(!this.m_forwardPlayerReachedGoal)
-                MusicPlayer.Instance.PlayLoopingMusic(this.m_gudrunReachedGoal);
+                MusicPlayer.Instance.PlayMusicOnce(this.m_gudrunReachedGoal);
             
             this.CheckGameSuccess();
         }
@@ -116,7 +116,7 @@ namespace Nidavellir
             this.m_forwardPlayerReachedGoal = true;
             
             if(!this.m_backwardPlayerReachedGoal)
-                MusicPlayer.Instance.PlayLoopingMusic(this.m_karlReachedGoal);
+                MusicPlayer.Instance.PlayMusicOnce(this.m_karlReachedGoal);
             
             this.CheckGameSuccess();
         }
