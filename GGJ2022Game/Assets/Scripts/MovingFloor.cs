@@ -40,6 +40,7 @@ namespace Nidavellir
             if (!other.TryGetComponent<PlayerController>(out var playerController))
                 return;
 
+            playerController.EnvironmentVelocity = 0;
             this.m_players.Remove(playerController);
         }
 
