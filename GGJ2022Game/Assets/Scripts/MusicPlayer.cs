@@ -20,6 +20,8 @@ namespace Nidavellir
         private List<AudioClip> m_gameThemeClips;
         private Coroutine m_queueRoutine;
 
+        private int m_lastLoadedSceneIndex;
+
         public static MusicPlayer Instance => s_instance;
 
         private void Awake()
@@ -44,16 +46,20 @@ namespace Nidavellir
             };
         }
 
-        private void SceneChanged(Scene arg0, LoadSceneMode arg1)
+        private void SceneChanged(Scene loadedScene, LoadSceneMode arg1)
         {
-            if (arg0.buildIndex == 0)
+            var hasLoadedMainMenu = loadedScene.buildIndex == 0;
+            var hasSceneChanged = this.m_lastLoadedSceneIndex != loadedScene.buildIndex;
+            if (hasLoadedMainMenu)
             {
                 this.PlayLoopingMusic(this.m_titleTheme);
             }
-            else
+            else if(hasSceneChanged)
             {
                 this.PlayClips(this.m_gameThemeClips);
             }
+            
+            this.m_lastLoadedSceneIndex = loadedScene.buildIndex;
         }
 
         public void PlayLoopingMusic(AudioClip toPlay)
@@ -86,7 +92,8 @@ namespace Nidavellir
                 this.m_queueRoutine = null;
                 this.m_audioSource.Stop();
             }
-
+            
+            this.m_audioSource.loop = true;
             this.m_queueRoutine = this.StartCoroutine(this.PlayQueue(clipQueue));
         }
 
@@ -103,10 +110,8 @@ namespace Nidavellir
             {
                 this.m_audioSource.clip = current;
                 this.m_audioSource.Play();
-                this.m_audioSource.loop = false;
                 yield return new WaitForSeconds(current.length);
             }
-            this.m_audioSource.loop = true;
         }
         
     }

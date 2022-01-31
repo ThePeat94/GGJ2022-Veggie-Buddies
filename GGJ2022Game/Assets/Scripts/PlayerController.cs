@@ -27,12 +27,13 @@ namespace Nidavellir
         [SerializeField] private AudioClip m_landAudioClip;
         [SerializeField] private RandomClipPlayer m_jumpRandomClipPlayer;
         [SerializeField] private RandomClipPlayer m_dieRandomClipPlayer;
+        [SerializeField] private AudioSource m_landAudioSource;
+
 
         private CharacterController m_characterController;
         private InputProcessor m_inputProcessor;
         private Animator m_animator;
         private AudioSource m_runningLoopAudioSource;
-        private AudioSource m_landAudioSource;
 
         private static readonly int s_isWalkingHash = Animator.StringToHash("IsWalking");
         private static readonly int s_jumpHash = Animator.StringToHash("Jump");
@@ -139,10 +140,6 @@ namespace Nidavellir
             this.m_runningLoopAudioSource.loop = true;
             this.m_runningLoopAudioSource.volume = 0.66f;
             this.m_runningLoopAudioSource.outputAudioMixerGroup = this.m_audioMixerGroup;
-
-            this.m_landAudioSource = this.gameObject.AddComponent<AudioSource>();
-            this.m_landAudioSource.clip = this.m_landAudioClip;
-            this.m_landAudioSource.outputAudioMixerGroup = this.m_audioMixerGroup;
         }
 
         private void Update()

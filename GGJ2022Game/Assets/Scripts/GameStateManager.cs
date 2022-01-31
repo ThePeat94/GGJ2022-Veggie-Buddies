@@ -216,7 +216,7 @@ namespace Nidavellir
                 this.m_latestCheckpointPassedPerPlayer[PlayerType.FORWARD_PLAYER] = null;
                 this.m_latestCheckpointPassedPerPlayer[PlayerType.BACKWARD_PLAYER] = null;
                 LevelTimer.Instance.StopStopWatch();
-                MusicPlayer.Instance.PlayLoopingMusic(this.m_levelSucceededSfx);
+                MusicPlayer.Instance.PlayMusicOnce(this.m_levelSucceededSfx);
                 this.m_levelSucceeded?.Invoke(this, System.EventArgs.Empty);
             }
         }
