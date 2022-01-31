@@ -159,6 +159,9 @@ namespace Nidavellir
         }
         private void LateUpdate()
         {
+            if(this.m_isDead)
+                return;
+
             this.UpdateAnimator();
         }
 
