@@ -2412,6 +2412,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4294433904482949361}
     m_Modifications:
+    - target: {fileID: 6561044296657106720, guid: bea6d4f62434115478ff9cd909ad2ea2, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 5.963
+      objectReference: {fileID: 0}
     - target: {fileID: 6561044296824145877, guid: bea6d4f62434115478ff9cd909ad2ea2, type: 3}
       propertyPath: m_Name
       value: StoneJumpUp

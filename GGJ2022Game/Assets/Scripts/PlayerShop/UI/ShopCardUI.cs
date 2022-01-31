@@ -46,9 +46,19 @@ namespace Nidavellir.PlayerShop.UI
             this.m_buyButton.gameObject.SetActive(!alreadyBought);
 
             if (this.m_data.PlayerType == PlayerType.FORWARD_PLAYER)
-                this.m_activateButton.interactable = PlayerInventory.Instance.ActiveKarlSkin != this.m_data;
+            {
+                var isInactive = PlayerInventory.Instance.ActiveKarlSkin != this.m_data;
+                this.m_activateButton.interactable = isInactive;
+                this.m_activateButton.GetComponentInChildren<TextMeshProUGUI>()
+                    .text = isInactive ? "Activate" : "Already active";
+            }
             else if (this.m_data.PlayerType == PlayerType.BACKWARD_PLAYER)
-                this.m_activateButton.interactable = PlayerInventory.Instance.ActiveGudrunSkin != this.m_data;
+            {
+                var isInactive = PlayerInventory.Instance.ActiveGudrunSkin != this.m_data;
+                this.m_activateButton.interactable = isInactive;
+                this.m_activateButton.GetComponentInChildren<TextMeshProUGUI>()
+                    .text = isInactive ? "Activate" : "Already active";
+            }
 
             var canStillAfford = PlayerInventory.Instance.CurrencyAmount >= this.m_data.Cost;
             this.m_costText.color = canStillAfford ? Color.green : Color.red;

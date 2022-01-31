@@ -137,6 +137,7 @@ namespace Nidavellir
             this.m_runningLoopAudioSource = this.gameObject.AddComponent<AudioSource>();
             this.m_runningLoopAudioSource.clip = this.m_runningLoopAudioClip;
             this.m_runningLoopAudioSource.loop = true;
+            this.m_runningLoopAudioSource.volume = 0.66f;
             this.m_runningLoopAudioSource.outputAudioMixerGroup = this.m_audioMixerGroup;
 
             this.m_landAudioSource = this.gameObject.AddComponent<AudioSource>();
@@ -147,7 +148,10 @@ namespace Nidavellir
         private void Update()
         {
             if(this.m_isDead || this.m_preventMovement)
+            {
+                this.m_characterController.Move(Vector3.zero);
                 return;
+            }
             
             this.ApplyGravity(Time.deltaTime); // we have to apply gravity first to make sure the CharacterController.isGrounded property works
             this.ApplyLocomotion(Time.deltaTime);
@@ -156,8 +160,9 @@ namespace Nidavellir
         }
         private void LateUpdate()
         {
-            if(this.m_isDead || this.m_preventMovement)
+            if(this.m_isDead)
                 return;
+
             this.UpdateAnimator();
         }
 
@@ -201,7 +206,7 @@ namespace Nidavellir
                 this.m_jumpVelocity = this.m_playerData.JumpVelocity;
                 this.m_hasJumpVelocity = true;
                 this.m_playJumpAnimation = true;
-                m_jumpRandomClipPlayer.PlayRandomOneShot();
+                this.m_jumpRandomClipPlayer.PlayRandomOneShot();
             }
         }
 
@@ -261,6 +266,9 @@ namespace Nidavellir
         public void PreventMovement()
         {
             this.m_preventMovement = true;
+            this.m_isLocomoting = false;
+            this.m_isGrounded = true;
+            this.m_runningLoopAudioSource.Stop();
         }
     }
 }

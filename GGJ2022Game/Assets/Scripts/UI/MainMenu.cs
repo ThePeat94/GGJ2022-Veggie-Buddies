@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -8,21 +10,15 @@ namespace Nidavellir.UI
     {
         [SerializeField] private GameObject m_startMenu;
         [SerializeField] private GameObject m_credits;
-        [SerializeField] private AudioClip m_gameTheme;
         [SerializeField] private GameObject m_shopMenu;
 
         [SerializeField] private AudioClip m_shopEnterSound;
         [SerializeField] private AudioClip m_shopLeftSound;
-        [SerializeField] private AudioClip m_titleTheme;
 
-        private void Start()
-        {
-            MusicPlayer.Instance.PlayLoopingMusic(this.m_titleTheme);
-        }
+        [SerializeField] private AudioSource m_shopAudioSource;
 
         public void StartGame()
         {
-            MusicPlayer.Instance.PlayLoopingMusic(this.m_gameTheme);
             SceneManager.LoadScene(1);
         }
 
@@ -45,14 +41,16 @@ namespace Nidavellir.UI
 
         public void ShowShop()
         {
-            AudioSource.PlayClipAtPoint(this.m_shopEnterSound, Camera.main.transform.position);
+            this.m_shopAudioSource.clip = this.m_shopEnterSound;
+            this.m_shopAudioSource.Play();
             this.m_startMenu.SetActive(false);
             this.m_shopMenu.SetActive(true);
         }
         
         public void BackFromShopToStart()
         {
-            AudioSource.PlayClipAtPoint(this.m_shopLeftSound, Camera.main.transform.position);
+            this.m_shopAudioSource.clip = this.m_shopLeftSound;
+            this.m_shopAudioSource.Play();
             this.m_startMenu.SetActive(true);
             this.m_shopMenu.SetActive(false);
         }

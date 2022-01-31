@@ -17,6 +17,7 @@ namespace Nidavellir
         {
             this.m_attackAudioSource = this.gameObject.AddComponent<AudioSource>();
             this.m_attackAudioSource.clip = this.m_attackAudioClip;
+            this.m_attackAudioSource.volume = 0.66f;
             this.m_attackAudioSource.outputAudioMixerGroup = this.m_audioMixerGroup;
         }
 

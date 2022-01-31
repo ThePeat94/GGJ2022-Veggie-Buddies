@@ -39,6 +39,12 @@ namespace Nidavellir.PlayerShop
         public void AddShopItem(ShopItem shopItem)
         {
             this.m_boughtShopItems.Add(shopItem);
+
+            if (shopItem.PlayerType == PlayerType.FORWARD_PLAYER)
+                this.ActiveKarlSkin = shopItem;
+            else if (shopItem.PlayerType == PlayerType.BACKWARD_PLAYER)
+                this.ActiveGudrunSkin = shopItem;
+            
             this.m_inventoryChanged?.Invoke(this, System.EventArgs.Empty);
         }
         

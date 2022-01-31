@@ -19,6 +19,7 @@ namespace Nidavellir
         [SerializeField] private AudioClip m_gudrunReachedGoal;
         [SerializeField] private AudioClip m_levelSucceededSfx;
 
+
         private bool m_anyPlayerDied;
         private bool m_levelHasSucceeded;
         private bool m_forwardPlayerReachedGoal;
@@ -105,7 +106,8 @@ namespace Nidavellir
             this.m_backwardPlayerReachedGoal = true;
             
             if(!this.m_forwardPlayerReachedGoal)
-                FindObjectOfType<OneShotSfxPlayer>()?.PlayOneShot(this.m_gudrunReachedGoal);
+                MusicPlayer.Instance.PlayMusicOnce(this.m_gudrunReachedGoal);
+            
             this.CheckGameSuccess();
         }
 
@@ -114,7 +116,7 @@ namespace Nidavellir
             this.m_forwardPlayerReachedGoal = true;
             
             if(!this.m_backwardPlayerReachedGoal)
-                FindObjectOfType<OneShotSfxPlayer>()?.PlayOneShot(this.m_karlReachedGoal);
+                MusicPlayer.Instance.PlayMusicOnce(this.m_karlReachedGoal);
             
             this.CheckGameSuccess();
         }
@@ -130,6 +132,8 @@ namespace Nidavellir
             var shouldGoBackToMainMenu = (this.m_anyPlayerDied || this.m_levelHasSucceeded) && this.m_inputProcessor.BackToMenuTriggered;
             if (shouldGoBackToMainMenu)
             {
+                this.m_latestCheckpointPassedPerPlayer[PlayerType.FORWARD_PLAYER] = null;
+                this.m_latestCheckpointPassedPerPlayer[PlayerType.BACKWARD_PLAYER] = null;
                 SceneManager.LoadScene(0);
                 return;
             }
@@ -143,8 +147,12 @@ namespace Nidavellir
             
             var shouldContinue = this.m_levelHasSucceeded && this.m_inputProcessor.RestartTriggered;
             if (shouldContinue)
-            {
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            {            
+                this.m_latestCheckpointPassedPerPlayer[PlayerType.FORWARD_PLAYER] = null;
+                this.m_latestCheckpointPassedPerPlayer[PlayerType.BACKWARD_PLAYER] = null;
+                Debug.Log(SceneManager.sceneCountInBuildSettings);
+                var sceneIndexToLoad = (SceneManager.GetActiveScene().buildIndex + 1) % SceneManager.sceneCountInBuildSettings;
+                SceneManager.LoadScene(sceneIndexToLoad);
                 return;
             }
         }
@@ -153,11 +161,11 @@ namespace Nidavellir
         {
             if (arg0.buildIndex == 0)
                 return;
-            
-            
+
             this.m_anyPlayerDied = false;
             this.m_forwardPlayerReachedGoal = false;
             this.m_backwardPlayerReachedGoal = false;
+            this.m_levelHasSucceeded = false;
             
             var players = FindObjectsOfType<PlayerController>();
             this.m_forwardPlayer = players.First(pc => pc.PlayerType == PlayerType.FORWARD_PLAYER);
@@ -208,7 +216,7 @@ namespace Nidavellir
                 this.m_latestCheckpointPassedPerPlayer[PlayerType.FORWARD_PLAYER] = null;
                 this.m_latestCheckpointPassedPerPlayer[PlayerType.BACKWARD_PLAYER] = null;
                 LevelTimer.Instance.StopStopWatch();
-                FindObjectOfType<OneShotSfxPlayer>()?.PlayOneShot(this.m_levelSucceededSfx);
+                MusicPlayer.Instance.PlayLoopingMusic(this.m_levelSucceededSfx);
                 this.m_levelSucceeded?.Invoke(this, System.EventArgs.Empty);
             }
         }
