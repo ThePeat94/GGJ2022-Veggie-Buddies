@@ -10,7 +10,6 @@ namespace Nidavellir
         private void OnCollisionEnter(Collision collision)
         {
             var projectile = collision.gameObject.GetComponent<Projectile>();
-            Debug.Log(projectile);
             if (projectile != null)
                 this.Attack();
         }

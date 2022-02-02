@@ -79,7 +79,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef7f90b2c09c1ec48a92add9c33cc800, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_swingAudioClip: {fileID: 0}
+  m_swingAudioClip: {fileID: 8300000, guid: 8c85272b18838a84c9b92f6a8a446367, type: 3}
   m_hitAudioClip: {fileID: 0}
   m_audioMixerGroup: {fileID: 8433430384898204005, guid: 388f718078838d441a5f6db835181182, type: 2}
   m_reachableTargetDetector: {fileID: 0}

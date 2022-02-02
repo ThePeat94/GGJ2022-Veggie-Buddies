@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Nidavellir
@@ -8,6 +9,7 @@ namespace Nidavellir
     {
         [SerializeField] private float m_frequency;
         [SerializeField] private float m_amplitude;
+        [SerializeField] private RandomClipPlayer m_hitSomethingPlayer;
 
         private AttackTarget m_attackTarget;
 
@@ -31,6 +33,11 @@ namespace Nidavellir
         {
             var velocity = -this.m_amplitude * this.m_frequency * Mathf.Sin(Time.timeSinceLevelLoad * m_frequency);
             this.transform.Translate(Vector3.right * Time.fixedDeltaTime * velocity, Space.World);
+        }
+
+        private void OnCollisionEnter(Collision other)
+        {
+            this.m_hitSomethingPlayer.PlayRandomOneShot();
         }
     }
 }

@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 2475801129512816544}
   - component: {fileID: 4179679514858240966}
   - component: {fileID: 6112135738849550080}
+  - component: {fileID: 147729952706974323}
   m_Layer: 12
   m_Name: Spikey
   m_TagString: Untagged
@@ -63,6 +64,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_frequency: 15
   m_amplitude: 1
+  m_hitSomethingPlayer: {fileID: 147729952706974323}
 --- !u!65 &2475801129512816544
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -107,6 +109,24 @@ MonoBehaviour:
   onAttacked:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &147729952706974323
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4493416286542116477}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc91a6e7ff62db440b123bf22168b012, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_concurrentPlyback: 0
+  m_audioClips:
+  - {fileID: 8300000, guid: e84f17eeddaaaa94982ea3b00569615e, type: 3}
+  - {fileID: 8300000, guid: fa634a0090962ed439921eba970673ac, type: 3}
+  - {fileID: 8300000, guid: 052927c70dcedf245957abffbefcb691, type: 3}
+  m_audioMixerGroup: {fileID: 8433430384898204005, guid: 388f718078838d441a5f6db835181182, type: 2}
 --- !u!1001 &4493416287270460314
 PrefabInstance:
   m_ObjectHideFlags: 0
